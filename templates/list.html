@@ -1,41 +1,68 @@
-{% extends 'base.html' %}
+{% extends 'body.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+    <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+{% endblock %}
+                                {% block content %}
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title m-0">
+                                            <i class="fas fa-tags"></i>
+                                            {{ subtitle }}
+                                        </h5>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="data" class="table table-bordered table-striped">
+                                            <thead>
+                                            {% block columns %}
+                                            {% endblock %}
+                                            </thead>
+                                            <tbody>
+                                            {% block rows %}
+                                            {% endblock %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-primary btnTest"><i class="fas fa-plus"></i> Nuevo registro</button>
+                                    </div>
+                                </div>
+                                <!-- /.content -->
+                                {% endblock %}
 
-    {% block content %}
-    <!-- Main content -->
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card card-default">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-tags"></i>
-                  {{ subtitle }}
-                </h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table">
-                  <thead>
-                    {% block columns %}
-                    {% endblock %}
-                  </thead>
-                  <tbody>
-                    {% block rows %}
-                    {% endblock %}
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo registro</button>
-              </div>
-            </div>
-          </div>
-          <!-- /.col-md-12 -->
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-    {% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+    $(function () {
+        $("#data").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "language": {
+                url: '{% static 'lang/es-ES.json' %}'
+            }
+        });
+        $('.btnTest').on('click', function () {
+            $.ajax({
+                url: '{% url 'erp:category_list' %}',
+                type: 'POST',
+                data: {id: 1},
+                dataType: 'json'
+            }).done(function (data) {
+                console.log(data);
+            }).fail(function () {
+                alert('error');
+            }).always(function () {
+                alert('success');
+            })
+        })
+    });
+</script>
+{% endblock %}

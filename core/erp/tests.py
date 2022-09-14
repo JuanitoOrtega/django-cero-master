@@ -1,35 +1,9 @@
 from config.wsgi import *
-from core.erp.models import Type
+from core.erp.models import *
 
-# Listar
-# SELECT * FROM TABLE
-query = Type.objects.all()
-# print(query)
+data = ['Leche y derivados', 'Carnes, pescados y huevos', 'Patatas, legumbres, frutos secos', 'Verduras y Hortalizas', 'Frutas', 'Cereales, azúcar y dulces', 'Grasas, aceite y mantequilla']
 
-# Insert
-tipo = Type(name="CEO")
-# tipo.name = 'Representante'
-# tipo.save()
-
-# Update
-# try:
-#     update = Type.objects.get(id=4)
-#     update.name = 'Sayayin'
-#     update.save()
-# except Exception as e:
-#     print(e)
-
-# Delete
-delete = Type.objects.get(pk=4)
-# delete.delete()
-
-# filter
-# obj = Type.objects.filter(name__icontains="temporal").query
-# obj = Type.objects.filter(name__istartswith="t")
-objects = Type.objects.filter(name__iendswith="e")
-for i in objects:
-    print(i.name)
-
-# order
-# query = Type.objects.order_by(name="CEO")
-# print(query)
+for i in data:
+    category = Category(name=i)
+    category.save()
+    print('Guardado registro Nro. {}'.format(category.id))
