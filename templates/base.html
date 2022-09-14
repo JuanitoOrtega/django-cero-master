@@ -1,8 +1,15 @@
 {% include 'includes/header.html' %}
   {% include 'includes/navbar.html' %}
 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    {% include 'includes/breadcrumb.html' %}
     {% block content %}
     {% endblock %}
+
+  </div>
+  <!-- /.content-wrapper -->
 
   {% include 'includes/sidebar.html' %}
 {% include 'includes/footer.html' %}
