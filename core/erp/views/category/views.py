@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
@@ -8,7 +9,7 @@ from django.views.generic import ListView, CreateView
 
 # Vistas basadas en funciones
 def category_list(request):
-  
+
   data = {
     'title': 'Categorías',
     'subtitle': 'Listado de categorías',
@@ -28,6 +29,7 @@ class CategoryListView(ListView):
     context = super().get_context_data(**kwargs)
     context['title'] = 'Categorías'
     context['subtitle'] = 'Lista de categorías'
+    context['create_url'] = reverse_lazy('erp:category_create')
     return context
 
 
@@ -41,4 +43,5 @@ class CategoryCreateView(CreateView):
     context = super().get_context_data(**kwargs)
     context['title'] = 'Nueva categoría'
     context['subtitle'] = 'Crear nueva categoría'
+    context['list_url'] = reverse_lazy('erp:category_list')
     return context

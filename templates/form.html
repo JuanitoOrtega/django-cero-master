@@ -1,0 +1,46 @@
+{% extends 'body.html' %}
+{% load widget_tweaks %}
+                                {% block content %}
+                                <form method="post" action=".">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title m-0">
+                                                <i class="fas fa-plus"></i>
+                                                {{ subtitle }}
+                                            </h5>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            {% csrf_token %}
+                                            {% for field in form.visible_fields %}
+                                            <div class="form-group">
+                                                <label for="description">{{ field.label }}</label>
+                                                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar registro</button>
+                                            <a href="{{ list_url }}" class="btn btn-secondary"><i class="fas fa-undo-alt"></i> Cancelar</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.content -->
+                                </form>
+                                <script>
+                                    {% if form.errors %}
+                                        let errors = '';
+                                        {% for field in form %}
+                                            {% for error in field.errors %}
+                                                errors += '{{ error }}\n';
+                                            {% endfor %}
+                                        {% endfor %}
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: errors,
+                                            icon: 'error',
+                                            confirmButtonText: 'Cerrar'
+                                        });
+                                    {% endif %}
+                                </script>
+                                {% endblock %}
