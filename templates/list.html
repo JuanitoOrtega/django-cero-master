@@ -32,7 +32,7 @@
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
-                                        <a href="{{ create_url }}" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo registro</a>
+                                        <a href="{{ create_url }}" class="btn btn-primary btnTest"><i class="fas fa-plus"></i> Nuevo registro</a>
                                     </div>
                                 </div>
                                 <!-- /.content -->
@@ -48,6 +48,20 @@
             "language": {
                 url: '{% static 'datatables/lang/es-ES.json' %}'
             }
+        });
+        $('.btnTest').on('click', function() {
+            $.ajax({
+                url: '{% url 'erp:category_list' %}',
+                type: 'POST',
+                data: { id: 1},
+                dataType: 'json'
+            }).done(function(data) {
+                console.log(data);
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                alert(textStatus + ': ' + errorThrown);
+            }).always(function(data) {
+
+            });
         });
     });
 </script>
