@@ -40,6 +40,7 @@ class CategoryForm(ModelForm):
         }
     
     # Alternativamente otra forma de usar post con ajax
+    # Comentado para no usar método post en UpdateView
     def save(self, commit=True):
         data = {}
         form = super()

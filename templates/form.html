@@ -43,12 +43,13 @@
                                             confirmButtonText: 'Cerrar'
                                         });
                                     {% endif %}
+                                    /*Comentado para no usar método post en UpdateView*/
                                     $('form').on('submit', function(e) {
                                         e.preventDefault();
                                         var parameters = $(this).serializeArray();
-                                        /*console.log(parameters);*/
+                                        console.log(parameters);
                                         $.ajax({
-                                            url: '{% url 'erp:category_create' %}',
+                                            url: window.location.pathname,
                                             type: 'POST',
                                             data: parameters,
                                             dataType: 'json'

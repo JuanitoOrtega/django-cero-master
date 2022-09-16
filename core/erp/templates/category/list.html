@@ -15,7 +15,7 @@
                                                     <td>{{ category.name }}</td>
                                                     <td>{% if category.description %}{{ category.description }}{% endif %}</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
+                                                        <a href="{% url 'erp:category_update' category.id %}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
                                                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                                     </td>
                                                 </tr>
