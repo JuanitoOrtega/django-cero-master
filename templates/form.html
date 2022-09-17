@@ -5,7 +5,11 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h5 class="card-title m-0">
+                                                {% if action == 'add' %}
                                                 <i class="fas fa-plus"></i>
+                                                {% else %}
+                                                <i class="fas fa-edit"></i>
+                                                {% endif %}
                                                 {{ subtitle }}
                                             </h5>
                                         </div>
