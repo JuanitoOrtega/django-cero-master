@@ -1,4 +1,8 @@
 {% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+    <script src="{% static 'category/js/list.js' %}"></script>
+{% endblock %}
                                                 {% block columns %}
                                                 <tr>
                                                     <th scope="col" style="width: 10%;">Nro.</th>
@@ -9,15 +13,7 @@
                                                 {% endblock %}
 
                                                 {% block rows %}
-                                                {% for category in object_list %}
-                                                <tr>
-                                                    <td scope="row">{{ category.id }}</td>
-                                                    <td>{{ category.name }}</td>
-                                                    <td>{% if category.description %}{{ category.description }}{% endif %}</td>
-                                                    <td>
-                                                        <a href="{% url 'erp:category_update' category.id %}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-                                                        <a href="{% url 'erp:category_delete' category.id %}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
+                                                
                                                 {% endblock %}
+{% block javascript %}
+{% endblock %}
