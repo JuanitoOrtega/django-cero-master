@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% load widget_tweaks %}
 {% block content %}
-<form method="post" action=".">
+<form method="post" action="." enctype="multipart/form-data">
     {% csrf_token %}
     <div class="card">
         <div class="card-header">
@@ -39,8 +39,8 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar registro</button>
-            <a href="{{ list_url }}" class="btn btn-secondary"><i class="fas fa-undo-alt"></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary btn-flat"><i class="fas fa-save"></i> Guardar registro</button>
+            <a href="{{ list_url }}" class="btn btn-secondary btn-flat"><i class="fas fa-undo-alt"></i> Cancelar</a>
         </div>
     </div>
     <!-- /.content -->
@@ -63,27 +63,11 @@
             confirmButtonText: 'Cerrar'
         });
     {% endif %}
-    /*Comentado para no usar método post en UpdateView*/
-    /*$('form').on('submit', function(e) {
+    /*$('form').on('submit', function (e) {
         e.preventDefault();
-        var parameters = $(this).serializeArray();
-        console.log(parameters);
-        $.ajax({
-            url: window.location.pathname,
-            type: 'POST',
-            data: parameters,
-            dataType: 'json'
-        }).done(function(data) {
-            console.log(data);
-            if (!data.hasOwnProperty('error')) {
-                location.href = '{{ list_url }}';
-                return false;
-            }
-            message_error(data.error);
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            alert(textStatus + ': ' + errorThrown);
-        }).always(function(data) {
-
+        let parameters = $(this).serializeArray();
+        submit_with_ajax(window.location.pathname, 'Confirmación', '¿Estás seguro que quieres realizar esta acción?', parameters, function () {
+            location.href = '{{ list_url }}';
         });
     });*/
 </script>

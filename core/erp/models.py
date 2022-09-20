@@ -3,6 +3,7 @@ from datetime import datetime
 
 from django.forms import model_to_dict
 
+from config.settings import MEDIA_URL, STATIC_URL
 from core.erp.choices import gender_choices
 
 
@@ -27,11 +28,16 @@ class Category(models.Model):
 class Product(models.Model):
     product_name = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, verbose_name='Categoría')
-    image = models.ImageField(upload_to='product/%Y/%m/%d', null=True, blank=True, verbose_name='Foto')
+    image = models.ImageField(upload_to='product/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen del producto')
     price = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Precio')
 
     def __str__(self):
         return self.product_name
+
+    def get_image(self):
+        if self.image:
+            return '{}{}'.format(MEDIA_URL, self.image)
+        return '{}{}'.format(STATIC_URL, 'images/default/default_product.png')
 
     class Meta:
         verbose_name = 'Producto'
@@ -58,12 +64,10 @@ class Client(models.Model):
 
 class Sale(models.Model):
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, verbose_name='Cliente')
-    date_joined = models.DateField(default=datetime.now, verbose_name='Fecha')
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Subtotal')
     iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='IVA')
     total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Total')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de registro")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Fecha de actualización")
+    created_at = models.DateField(default=datetime.now, verbose_name="Fecha de venta")
 
     def __str__(self):
         return self.client.first_name
