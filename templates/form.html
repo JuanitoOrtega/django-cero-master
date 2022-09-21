@@ -63,12 +63,13 @@
             confirmButtonText: 'Cerrar'
         });
     {% endif %}
-    /*$('form').on('submit', function (e) {
+    $('form').on('submit', function (e) {
         e.preventDefault();
         let parameters = $(this).serializeArray();
-        submit_with_ajax(window.location.pathname, 'Confirmación', '¿Estás seguro que quieres realizar esta acción?', parameters, function () {
+        // let parameters = new FormData(this);
+        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
             location.href = '{{ list_url }}';
         });
-    });*/
+    });
 </script>
 {% endblock %}

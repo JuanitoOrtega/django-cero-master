@@ -37,18 +37,18 @@ class ProductCreateView(CreateView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    # def post(self, request, *args, **kwargs):
-    #     data = {}
-    #     try:
-    #         action = request.POST['action']
-    #         if action == 'add':
-    #             form = self.get_form()
-    #             data = form.save()
-    #         else:
-    #             data['error'] = 'No ha ingresado a ninguna opción'
-    #     except Exception as e:
-    #         data['error'] = str(e)
-    #     return JsonResponse(data)
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'add':
+                form = self.get_form()
+                data = form.save()
+            else:
+                data['error'] = 'No ha ingresado a ninguna opción'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
