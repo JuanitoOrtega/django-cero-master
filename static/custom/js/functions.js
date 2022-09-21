@@ -4,8 +4,6 @@ function message_error(obj) {
         html = '<ul style="list-style:none;padding-inline-start: 0px;">';
         $.each(obj, function (key, value) {
             html += '<li>' + value + '</li>';
-            console.log(key);
-            console.log(value);
         });
         html += '</ul>';
     } else {
@@ -39,7 +37,9 @@ function submit_with_ajax(url, title, content, parameters, callback) {
                         url: url, // window.location.pathname
                         type: 'POST',
                         data: parameters,
-                        dataType: 'json'
+                        dataType: 'json',
+                        processData: false,
+                        contentType: false,
                     }).done(function(data) {
                         console.log(data);
                         if (!data.hasOwnProperty('error')) {
@@ -60,7 +60,7 @@ function submit_with_ajax(url, title, content, parameters, callback) {
                 action: function () {
 
                 }
-            },
+            }
         }
     });
 }

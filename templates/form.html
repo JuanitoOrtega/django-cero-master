@@ -32,7 +32,7 @@
             {% endif %}
             {% for field in form.visible_fields %}
             <div class="form-group">
-                <label for="description">{{ field.label }}</label>
+                <label for="email">{{ field.label }}</label>
                 {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
             </div>
             {% endfor %}
@@ -45,7 +45,7 @@
     </div>
     <!-- /.content -->
 </form>
-<script>
+<script type="text/javascript">
     {% if form.errors %}
         let errors = '';
         {% for field in form %}
@@ -65,9 +65,9 @@
     {% endif %}
     $('form').on('submit', function (e) {
         e.preventDefault();
-        let parameters = $(this).serializeArray();
-        // let parameters = new FormData(this);
-        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
+        // let parameters = $(this).serializeArray();
+        let parameters = new FormData(this);
+        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estás seguro que quieres realizar esta acción?', parameters, function () {
             location.href = '{{ list_url }}';
         });
     });

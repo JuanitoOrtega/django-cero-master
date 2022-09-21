@@ -78,11 +78,23 @@ class ProductForm(ModelForm):
         return data
 
 
-class TestForm(Form):
+class SelectAjaxForm(Form):
     categories = ModelChoiceField(queryset=Category.objects.all(), widget=Select(attrs={
         'class': 'form-control'
     }))
 
     products = ModelChoiceField(queryset=Product.objects.none(), widget=Select(attrs={
         'class': 'form-control'
+    }))
+
+
+class Select2Form(Form):
+    categories = ModelChoiceField(queryset=Category.objects.all(), widget=Select(attrs={
+        'class': 'form-control select2',
+        'style': 'width: 100%'
+    }))
+
+    products = ModelChoiceField(queryset=Product.objects.none(), widget=Select(attrs={
+        'class': 'form-control select2',
+        'style': 'width: 100%'
     }))

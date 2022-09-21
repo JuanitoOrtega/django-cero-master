@@ -2,7 +2,7 @@ from django.urls import path
 from core.erp.views.category.views import *
 from core.erp.views.dashboard.views import *
 from core.erp.views.product.views import *
-from core.erp.views.tests.views import TestView
+from core.erp.views.tests.views import *
 
 app_name = 'erp'
 
@@ -21,5 +21,6 @@ urlpatterns = [
     # home
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
     # test
-    path('test/', TestView.as_view(), name='test'),
+    path('selectajax/', TestView.as_view(), name='selectajax'),
+    path('select2/', Select2View.as_view(), name='select2'),
 ]
