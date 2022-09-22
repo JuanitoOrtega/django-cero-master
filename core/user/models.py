@@ -11,4 +11,4 @@ class User(AbstractUser):
     def get_image(self):
         if self.image:
             return '{}{}'.format(MEDIA_URL, self.image)
-        return '{}{}'.format(STATIC_URL, 'images/default/default_product.png')
+        return '{}{}'.format(STATIC_URL, 'images/default/avatar.jpeg')

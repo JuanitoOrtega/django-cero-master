@@ -34,6 +34,18 @@ class ClientView(TemplateView):
                 client.address = request.POST['address']
                 client.gender = request.POST['gender']
                 client.save()
+            elif action == 'edit':
+                client = Client.objects.get(pk=request.POST['id'])
+                client.first_name = request.POST['first_name']
+                client.last_name = request.POST['last_name']
+                client.ci = request.POST['ci']
+                client.birthday = request.POST['birthday']
+                client.address = request.POST['address']
+                client.gender = request.POST['gender']
+                client.save()
+            elif action == 'delete':
+                client = Client.objects.get(pk=request.POST['id'])
+                client.delete()
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:

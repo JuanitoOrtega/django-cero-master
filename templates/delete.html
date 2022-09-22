@@ -25,7 +25,7 @@
 <script>
     $('form').on('submit', function (e) {
         e.preventDefault();
-        let parameters = $(this).serializeArray();
+        let parameters = new FormData(this);
         submit_with_ajax(window.location.pathname, 'Confirmación', '¿Estás seguro que quieres eliminar este registro?', parameters, function () {
             location.href = '{{ list_url }}';
         });

@@ -7,13 +7,13 @@
 
 {% block columns %}
     <tr>
-        <th scope="col" style="width: 10%;">Nro</th>
-        <th scope="col" style="width: 15%;">Nombres</th>
-        <th scope="col" style="width: 15%;">Apellidos</th>
-        <th scope="col" style="width: 10%;">Dni</th>
-        <th scope="col" style="width: 15%;">Fecha de nacimiento</th>
-        <th scope="col" style="width: 15%;">Sexo</th>
-        <th scope="col" style="width: 20%;">Opciones</th>
+        <th scope="col" style="width: 5%;">Nro.</th>
+        <th scope="col" style="width: 20%;">Nombres</th>
+        <th scope="col" style="width: 25%;">Apellidos</th>
+        <th scope="col" style="width: 10%;">CI</th>
+        <th scope="col" style="width: 15%;">Nacimiento</th>
+        <th scope="col" style="width: 10%;">Género</th>
+        <th scope="col" style="width: 15%;">Opciones</th>
     </tr>
 {% endblock %}
 
@@ -28,18 +28,21 @@
 {% block javascript %}
     <!-- Modal -->
     <div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form method="post" action="." enctype="multipart/form-data">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Registrar cliente</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <b><i class="fas fa-plus"></i> <span></span></b>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="." enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="container-fluid">
                             <input type="hidden" name="action" value="add">
+                            <input type="hidden" name="id" id="id" value="0">
                             {% for field in form.visible_fields %}
                             <div class="form-group">
                                 <label for="email">{{ field.label }}</label>
@@ -49,11 +52,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary btn-flat btn-block">Guardar</button>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 {% endblock %}
