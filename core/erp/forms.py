@@ -124,7 +124,7 @@ class ClientForm(ModelForm):
             ),
             'ci': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese su dni',
+                    'placeholder': 'Ingrese su carnet de identidad',
                 }
             ),
             'birthday': DateInput(format='%Y-%m-%d',

@@ -20,5 +20,40 @@
 {% block rows %}
 {% endblock %}
 
+{% block buttons_list %}
+    <button class="btn btn-primary btn-flat btnAdd"><i class="fas fa-plus"></i> Nuevo registro</button>
+    <button class="btn btn-success btn-flat btnUpdate"><i class="fas fa-sync"></i> Actualizar</button>
+{% endblock %}
+
 {% block javascript %}
+    <!-- Modal -->
+    <div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form method="post" action="." enctype="multipart/form-data">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Registrar cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <input type="hidden" name="action" value="add">
+                            {% for field in form.visible_fields %}
+                            <div class="form-group">
+                                <label for="email">{{ field.label }}</label>
+                                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}
