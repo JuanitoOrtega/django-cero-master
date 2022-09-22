@@ -52,8 +52,8 @@ class ProductCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación de un Producto'
-        context['entity'] = 'Productos'
+        context['title'] = 'Productos'
+        context['subtitle'] = 'Creación de un Producto'
         context['list_url'] = reverse_lazy('erp:product_list')
         context['action'] = 'add'
         return context
@@ -85,8 +85,8 @@ class ProductUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Edición de un Producto'
-        context['entity'] = 'Productos'
+        context['title'] = 'Productos'
+        context['subtitle'] = 'Edición de un producto'
         context['list_url'] = reverse_lazy('erp:product_list')
         context['action'] = 'edit'
         return context
@@ -112,7 +112,7 @@ class ProductDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminación de un Producto'
-        context['entity'] = 'Productos'
+        context['title'] = 'Productos'
+        context['subtitle'] = 'Eliminación de un producto'
         context['list_url'] = reverse_lazy('erp:product_list')
         return context

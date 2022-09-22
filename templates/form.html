@@ -33,7 +33,7 @@
             {% for field in form.visible_fields %}
             <div class="form-group">
                 <label for="email">{{ field.label }}</label>
-                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+                {{ field }}
             </div>
             {% endfor %}
         </div>

@@ -20,11 +20,13 @@ class CategoryForm(ModelForm):
             'name': TextInput(
                 attrs={
                     'placeholder': 'Ingrese un nombre',
+                    'class': 'form-control',
                 }
             ),
             'description': Textarea(
                 attrs={
-                    'placeholder': 'Ingrese un nombre',
+                    'placeholder': 'Ingrese una descripción para la categoría',
+                    'class': 'form-control',
                     'rows': 3,
                     'cols': 3
                 }
@@ -54,6 +56,8 @@ class CategoryForm(ModelForm):
 class ProductForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['autocomplete'] = 'off'
         self.fields['product_name'].widget.attrs['autofocus'] = True
 
     class Meta:
@@ -63,8 +67,26 @@ class ProductForm(ModelForm):
             'product_name': TextInput(
                 attrs={
                     'placeholder': 'Ingrese un nombre',
+                    'class': 'form-control',
                 }
             ),
+            'category': Select(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'image': FileInput(
+                attrs={
+                    'class': 'form-control-file',
+                }
+            ),
+            'price': TextInput(
+                attrs={
+                    'type': 'number',
+                    'step': '0.01',
+                    'class': 'form-control',
+                }
+            )
         }
 
     def save(self, commit=True):
@@ -99,6 +121,23 @@ class Select2Form(Form):
     products = ModelChoiceField(queryset=Product.objects.none(), widget=Select(attrs={
         'class': 'form-control select2',
         'style': 'width: 100%'
+    }))
+
+
+class AutoAjaxForm(Form):
+    categories = ModelChoiceField(queryset=Category.objects.all(), widget=Select(attrs={
+        'class': 'form-control select2',
+        'style': 'width: 100%'
+    }))
+
+    products = ModelChoiceField(queryset=Product.objects.none(), widget=Select(attrs={
+        'class': 'form-control select2',
+        'style': 'width: 100%'
+    }))
+
+    search = CharField(widget=TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Ingrese una descripción'
     }))
 
 

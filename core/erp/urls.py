@@ -1,7 +1,7 @@
 from django.urls import path
 from core.erp.views.category.views import *
 from core.erp.views.product.views import *
-from core.erp.views.client.views import ClientView
+from core.erp.views.client.views import *
 from core.erp.views.dashboard.views import *
 from core.erp.views.tests.views import *
 
@@ -21,9 +21,10 @@ urlpatterns = [
     path('product/delete/<int:pk>/', ProductDeleteView.as_view(), name='product_delete'),
     # Client
     path('client/', ClientView.as_view(), name='client'),
-    # home
+    # Home
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
-    # test
+    # Test
     path('selectajax/', TestView.as_view(), name='selectajax'),
     path('select2/', Select2View.as_view(), name='select2'),
+    path('autoajax/', AutoAjaxView.as_view(), name='autoajax'),
 ]
