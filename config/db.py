@@ -16,11 +16,10 @@ POSTGRESQL = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'horus',
-        'USER': 'jortega',
+        'USER': 'juanitodev',
         # 'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': 5432,
-        'ATOMIC_REQUESTS': True
     }
 }
 
@@ -34,6 +33,9 @@ MYSQL = {
         'PASSWORD': '123',
         'HOST': 'localhost',
         'PORT': '',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     }
 }
 

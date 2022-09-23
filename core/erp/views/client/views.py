@@ -5,8 +5,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
-from core.erp.models import Client
 from core.erp.forms import ClientForm
+from core.erp.models import Client
 
 
 class ClientView(TemplateView):

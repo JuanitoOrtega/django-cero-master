@@ -19,7 +19,7 @@ $(function() {
       {'data': 'id'},
       {'data': 'name'},
       {'data': 'description'},
-      {'data': 'description'},
+      {'data': 'id'},
     ],
     columnDefs: [
       {
