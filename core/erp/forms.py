@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.forms import *
 
-from core.erp.models import Category, Product, Client
+from core.erp.models import Category, Product, Client, Sale
 
 
 class CategoryForm(ModelForm):
@@ -125,11 +125,12 @@ class ClientForm(ModelForm):
                     'class': 'form-control',
                 }
             ),
-            'birthday': DateInput(format='%Y-%m-%d',
-               attrs={
-                   'value': datetime.now().strftime('%Y-%m-%d'),
-                   'class': 'form-control',
-               }
+            'birthday': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'class': 'form-control',
+                }
             ),
             'address': TextInput(
                 attrs={
@@ -211,3 +212,52 @@ class AutoSelect2Form(Form):
         'class': 'form-control select2',
         'style': 'width: 100%'
     }))
+
+
+class SaleForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class'] = 'form-control'
+            form.field.widget.attrs['autocomplete'] = 'off'
+        self.fields['client'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Sale
+        fields = '__all__'
+        widgets = {
+            'client': Select(
+                attrs={
+                    'class': 'form-control select2',
+                    'style': 'width: 100%',
+                }
+            ),
+            'date_joined': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'class': 'form-control',
+                }
+            ),
+            'subtotal': TextInput(
+                attrs={
+                    'type': 'number',
+                    'step': '0.01',
+                    'class': 'form-control',
+                }
+            ),
+            'iva': TextInput(
+                attrs={
+                    'type': 'number',
+                    'step': '0.01',
+                    'class': 'form-control',
+                }
+            ),
+            'total': TextInput(
+                attrs={
+                    'type': 'number',
+                    'step': '0.01',
+                    'class': 'form-control',
+                }
+            )
+        }

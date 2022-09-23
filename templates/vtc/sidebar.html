@@ -47,25 +47,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{% url 'erp:category_list' %}" class="nav-link {% if '/erp/category/list/' == request.path %} active {% endif %}">
+                            <a href="{% url 'erp:category_list' %}" class="nav-link {% if '/erp/category/list/' == request.path %}active{% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Categorías</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'erp:product_list' %}" class="nav-link {% if '/erp/product/list/' == request.path %} active {% endif %}">
+                            <a href="{% url 'erp:product_list' %}" class="nav-link {% if '/erp/product/list/' == request.path %}active{% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Productos</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'erp:client_list' %}" class="nav-link {% if '/erp/client/list/' == request.path %} active {% endif %}">
+                            <a href="{% url 'erp:client_list' %}" class="nav-link {% if '/erp/client/list/' == request.path %}active{% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Clientes</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'erp:sale_list' %}" class="nav-link {% if '/erp/sale/list/' == request.path %} active {% endif %}">
+                            <a href="{% url 'erp:sale_create' %}" class="nav-link {% if '/erp/sale/add/' == request.path %}active{% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ventas</p>
                             </a>
