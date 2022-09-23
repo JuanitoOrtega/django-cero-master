@@ -23,12 +23,7 @@
         <!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
-                <input
-                        class="form-control form-control-sidebar"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                />
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
                     <button class="btn btn-sidebar">
                         <i class="fas fa-search fa-fw"></i>
@@ -39,12 +34,7 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul
-                    class="nav nav-pills nav-sidebar flex-column"
-                    data-widget="treeview"
-                    role="menu"
-                    data-accordion="false"
-            >
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
@@ -57,25 +47,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{% url 'erp:category_list' %}" class="nav-link active">
+                            <a href="{% url 'erp:category_list' %}" class="nav-link {% if '/erp/category/list/' == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Categorías</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'erp:product_list' %}" class="nav-link">
+                            <a href="{% url 'erp:product_list' %}" class="nav-link {% if '/erp/product/list/' == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Productos</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'erp:client' %}" class="nav-link">
+                            <a href="{% url 'erp:client_list' %}" class="nav-link {% if '/erp/client/list/' == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Clientes</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{% url 'erp:sale_list' %}" class="nav-link {% if '/erp/sale/list/' == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ventas</p>
                             </a>

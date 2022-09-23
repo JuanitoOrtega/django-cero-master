@@ -22,8 +22,8 @@
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="{% url 'erp:category_list' %}" class="dropdown-item"><i class="fas fa-truck-loading"></i> Categorías</a></li>
                         <li><a href="{% url 'erp:product_list' %}" class="dropdown-item"><i class="fas fa-boxes"></i> Productos</a></li>
-                        <li><a href="{% url 'erp:client' %}" class="dropdown-item"><i class="fas fa-users"></i> Clientes</a></li>
-                        <li><a href="#" class="dropdown-item"><i class="fas fa-shopping-cart"></i> Ventas</a></li>
+                        <li><a href="{% url 'erp:client_list' %}" class="dropdown-item"><i class="fas fa-users"></i> Clientes</a></li>
+                        <li><a href="{% url 'erp:sale_list' %}" class="dropdown-item"><i class="fas fa-shopping-cart"></i> Ventas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -139,8 +139,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <span class="dropdown-header">
-                        Último Acceso: 12 de Abril de 2020<br>
-                        Bienvenido: <strong>{{ request.user.username }}</strong>
+                        Último Acceso: {{ request.user.last_login|date:'d \d\e b \d\e Y' }} a hrs. {{ request.user.last_login|date:'H:i' }}
                     </span>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">

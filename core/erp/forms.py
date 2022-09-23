@@ -45,13 +45,6 @@ class CategoryForm(ModelForm):
             data['error'] = str(e)
         return data
 
-    # def clean(self):
-    #     cleaned = super().clean()
-    #     if len(cleaned['name']) <= 50:
-    #         raise forms.ValidationError('Validacion xxx')
-    #         # self.add_error('name', 'Le faltan caracteres')
-    #     return cleaned
-
 
 class ProductForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -72,7 +65,8 @@ class ProductForm(ModelForm):
             ),
             'category': Select(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control select2',
+                    'style': 'width: 100%;'
                 }
             ),
             'image': FileInput(
@@ -84,6 +78,67 @@ class ProductForm(ModelForm):
                 attrs={
                     'type': 'number',
                     'step': '0.01',
+                    'class': 'form-control',
+                }
+            )
+        }
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+
+
+class ClientForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['autocomplete'] = 'off'
+        self.fields['first_name'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Client
+        fields = '__all__'
+        widgets = {
+            'first_name': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese sus nombres',
+                    'class': 'form-control',
+                }
+            ),
+            'last_name': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese sus apellidos',
+                    'class': 'form-control',
+                }
+            ),
+            'ci': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese su CI',
+                    'class': 'form-control',
+                }
+            ),
+            'birthday': DateInput(format='%Y-%m-%d',
+               attrs={
+                   'value': datetime.now().strftime('%Y-%m-%d'),
+                   'class': 'form-control',
+               }
+            ),
+            'address': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese su dirección',
+                    'class': 'form-control',
+                }
+            ),
+            'gender': Select(
+                attrs={
                     'class': 'form-control',
                 }
             )
@@ -156,61 +211,3 @@ class AutoSelect2Form(Form):
         'class': 'form-control select2',
         'style': 'width: 100%'
     }))
-
-
-class ClientForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['first_name'].widget.attrs['autofocus'] = True
-
-    class Meta:
-        model = Client
-        fields = '__all__'
-        exclude = ['user_updated', 'user_creation']
-        widgets = {
-            'first_name': TextInput(
-                attrs={
-                    'placeholder': 'Ingrese sus nombres',
-                }
-            ),
-            'last_name': TextInput(
-                attrs={
-                    'placeholder': 'Ingrese sus apellidos',
-                }
-            ),
-            'ci': TextInput(
-                attrs={
-                    'placeholder': 'Ingrese su carnet de identidad',
-                }
-            ),
-            'birthday': DateInput(format='%Y-%m-%d',
-                attrs={
-                    'value': datetime.now().strftime('%Y-%m-%d'),
-                }
-            ),
-            'address': TextInput(
-                attrs={
-                    'placeholder': 'Ingrese su dirección',
-                }
-            ),
-            'gender': Select()
-        }
-
-    def save(self, commit=True):
-        data = {}
-        form = super()
-        try:
-            if form.is_valid():
-                form.save()
-            else:
-                data['error'] = form.errors
-        except Exception as e:
-            data['error'] = str(e)
-        return data
-
-    # def clean(self):
-    #     cleaned = super().clean()
-    #     if len(cleaned['name']) <= 50:
-    #         raise forms.ValidationError('Validacion xxx')
-    #         # self.add_error('name', 'Le faltan caracteres')
-    #     return cleaned

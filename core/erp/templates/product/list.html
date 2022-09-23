@@ -1,5 +1,9 @@
 {% extends 'list.html' %}
 {% load static %}
+{% block head_list %}
+    <script src="{% static 'product/js/list.js' %}"></script>
+{% endblock %}
+
 {% block columns %}
     <tr>
         <th scope="col" style="width: 10%;">Nro</th>
@@ -11,24 +15,5 @@
     </tr>
 {% endblock %}
 
-{% block rows %}
-    {% for product in object_list %}
-        <tr>
-            <td>{{ product.id }}</td>
-            <td>{{ product.product_name }}</td>
-            <td>{{ product.category.name }}</td>
-            <td class="text-center">
-                <img src="{{ product.get_image }}" class="img-fluid d-block mx-auto" style="width: 50px; height: 50px;">
-            </td>
-            <td>{{ product.price }}</td>
-            <td class="text-center">
-                <a href="{% url 'erp:product_update' product.id %}" class="btn btn-warning btn-xs btn-flat">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <a href="{% url 'erp:product_delete' product.id %}" class="btn btn-danger btn-xs btn-flat">
-                    <i class="fas fa-trash"></i>
-                </a>
-            </td>
-        </tr>
-    {% endfor %}
+{% block javascript %}
 {% endblock %}

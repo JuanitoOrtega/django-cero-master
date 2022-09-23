@@ -4,6 +4,9 @@ $(function () {
         autoWidth: false,
         destroy: true,
         deferRender: true,
+        language: {
+            url: '../../../../../static/datatables/lang/es-ES.json'
+        },
         ajax: {
             url: window.location.pathname,
             type: 'POST',
@@ -26,7 +29,7 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    return '<img src="'+data+'" class="img-fluid d-block mx-auto" style="width: 20px; height: 20px;">';
+                    return '<img src="'+data+'" class="img-fluid d-block mx-auto" style="width: 40px; height: 40px;">';
                 }
             },
             {
