@@ -27,4 +27,5 @@ urlpatterns = [
     path('selectajax/', TestView.as_view(), name='selectajax'),
     path('select2/', Select2View.as_view(), name='select2'),
     path('autoajax/', AutoAjaxView.as_view(), name='autoajax'),
+    path('autoselect2/', AutoSelect2View.as_view(), name='autoselect2'),
 ]

@@ -130,6 +130,31 @@
                 console.log(ui.item);
             }
         });
+
+        $('select[name="search"]').select2({
+            theme: 'bootstrap4',
+            language: 'es',
+            allowClear: true,
+            ajax: {
+                delay: 500,
+                type: 'POST',
+                url: window.location.pathname,
+                data: function(params) {
+                    let queryParameters = {
+                        term: params.term,
+                        action: 'autocomplete'
+                    }
+                    return queryParameters;
+                },
+                processResults: function(data) {
+                    return {
+                        results: data
+                    }
+                }
+            },
+            placeholder: 'Ingrese una descripción',
+            minimumInputLength: 2
+        });
     });
 </script>
 {% endblock %}
