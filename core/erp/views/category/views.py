@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -7,12 +7,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 
 from core.erp.forms import CategoryForm
-from core.erp.mixins import IsSuperuserMixin
+from core.erp.mixins import IsSuperuserMixin, ValidatePermissionRequiredMixin
 from core.erp.models import Category
 
 
 # Vistas basadas en clases
-class CategoryListView(LoginRequiredMixin, IsSuperuserMixin, ListView):
+class CategoryListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
+  # permiso requerido
+  permission_required = ('erp.change_category', 'erp.delete_category')
   model = Category
   template_name = 'category/list.html'
 
