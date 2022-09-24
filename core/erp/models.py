@@ -68,7 +68,7 @@ class Client(models.Model):
     def toJSON(self):
         item = model_to_dict(self)
         item['gender'] = {'id': self.gender, 'name': self.get_gender_display()}
-        item['birthday'] = self.birthday.strftime('%Y-%m-%d')
+        item['birthday'] = self.birthday.strftime('%d/%m/%Y')
         return item
 
     class Meta:

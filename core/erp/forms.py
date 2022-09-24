@@ -126,9 +126,9 @@ class ClientForm(ModelForm):
                 }
             ),
             'birthday': DateInput(
-                format='%Y-%m-%d',
+                format='%d/%m/%Y',
                 attrs={
-                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'value': datetime.now().strftime('%d/%m/%Y'),
                     'class': 'form-control',
                 }
             ),
@@ -224,6 +224,22 @@ class SaleForm(ModelForm):
         # self.fields['date_joined'].widget.attrs['class'] = 'form-control'
         # self.fields['client'].widget.attrs['style'] = 'width: 100%'
 
+        # Otra forma de agregrar atributos
+        self.fields['date_joined'].widget.attrs = {
+            'class': 'form-control datetimepicker-input',
+            'id': 'id_date_joined',
+            'data-target': '#date_joined',
+            'data-toggle': 'datetimepicker',
+        }
+        self.fields['subtotal'].widget.attrs = {
+            'readonly': True,
+            'class': 'form-control',
+        }
+        self.fields['total'].widget.attrs = {
+            'readonly': True,
+            'class': 'form-control',
+        }
+
     class Meta:
         model = Sale
         fields = '__all__'
@@ -234,31 +250,9 @@ class SaleForm(ModelForm):
                     'style': 'width: 100%',
                 }
             ),
-            'date_joined': DateInput(
-                format='%Y-%m-%d',
-                attrs={
-                    'value': datetime.now().strftime('%Y-%m-%d'),
-                    'class': 'form-control',
-                }
-            ),
-            'subtotal': TextInput(
-                attrs={
-                    'type': 'number',
-                    'step': '0.01',
-                    'class': 'form-control',
-                }
-            ),
             'iva': TextInput(
                 attrs={
                     'type': 'number',
-                    'step': '0.01',
-                    'class': 'form-control',
-                }
-            ),
-            'total': TextInput(
-                attrs={
-                    'type': 'number',
-                    'step': '0.01',
                     'class': 'form-control',
                 }
             )

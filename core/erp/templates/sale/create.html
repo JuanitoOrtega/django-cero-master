@@ -2,12 +2,23 @@
 {% load static %}
 
 {% block head_list %}
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="{% static 'plugins/jquery-ui/jquery-ui.min.css' %}">
+    <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
     <!-- Select2 -->
     <link rel="stylesheet" href="{% static 'plugins/select2/css/select2.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
     <script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
     <script src="{% static 'plugins/select2/js/i18n/es.js' %}"></script>
     <script src="{% static 'sale/js/form.js' %}"></script>
+    <!-- Tempus Dominus Bootstrap 4 -->
+    <script src="{% static 'plugins/moment/moment.min.js' %}"></script>
+    <script src="{% static 'plugins/moment/locale/es.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+    <script src="{% static 'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+    <!-- Bootstrap TouchSpin -->
+    <link rel="stylesheet" href="{% static 'bootstrap-touchspin/jquery.bootstrap-touchspin.min.css' %}">
+    <script src="{% static 'bootstrap-touchspin/jquery.bootstrap-touchspin.min.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -37,14 +48,14 @@
                     <div class="form-group">
                         <label for="products">Buscador de productos:</label>
                         <div class="input-group">
-                            <input type="text" id="products" class="form-control" placeholder="Buscar producto..." autocomplete="off">
+                            <input type="text" name="search" id="products" class="form-control" placeholder="Buscar producto..." autocomplete="off">
                             <span class="input-group-append">
                                 <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Limpiar"><i class="fas fa-eraser"></i></button>
                             </span>
                         </div>
                     </div>
                     <hr>
-                    <table id="data" class="table table-bordered table-striped">
+                    <table id="tblProducts" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Eliminar</th>
@@ -90,6 +101,10 @@
                     <div class="form-group">
                         <label for="id_iva">IVA:</label>
                         {{ form.iva }}
+                    </div>
+                    <div class="form-group">
+                        <label for="ivacalculado">IVA calculado:</label>
+                        <input type="text" name="ivacalculado" id="ivacalculado" class="form-control" value="0.00" readonly>
                     </div>
                     <div class="form-group">
                         <label for="id_total">Total a pagar:</label>
