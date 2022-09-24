@@ -218,9 +218,11 @@ class SaleForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for form in self.visible_fields():
-            form.field.widget.attrs['class'] = 'form-control'
+            # form.field.widget.attrs['class'] = 'form-control'
             form.field.widget.attrs['autocomplete'] = 'off'
         self.fields['client'].widget.attrs['autofocus'] = True
+        # self.fields['date_joined'].widget.attrs['class'] = 'form-control'
+        # self.fields['client'].widget.attrs['style'] = 'width: 100%'
 
     class Meta:
         model = Sale

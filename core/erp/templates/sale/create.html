@@ -1,16 +1,107 @@
 {% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{% static 'plugins/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+    <script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
+    <script src="{% static 'plugins/select2/js/i18n/es.js' %}"></script>
+    <script src="{% static 'sale/js/form.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header">
         <h5 class="card-title m-0">
-            <i class="fas fa-list"></i>
+            {% if action == 'add' %}
+            <i class="fas fa-plus"></i>
+            {% else %}
+            <i class="fas fa-edit"></i>
+            {% endif %}
             {{ subtitle }}
         </h5>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title"><i class="fas fa-boxes"></i> Detalle de productos</h3>
+                </div>
+                <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label for="products">Buscador de productos:</label>
+                        <div class="input-group">
+                            <input type="text" id="products" class="form-control" placeholder="Buscar producto..." autocomplete="off">
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Limpiar"><i class="fas fa-eraser"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <hr>
+                    <table id="data" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Eliminar</th>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                        </tbody>
+                    </table>
+                    
+                  </div>
+                  <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+  
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-4">
+              <!-- Form Element sizes -->
+              <div class="card card-info">
+                <div class="card-header">
+                  <h3 class="card-title"><i class="fas fa-file-invoice"></i> Datos de la factura</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="id_date_joined">Fecha de la venta:</label>
+                        {{ form.date_joined }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_client">Cliente:</label>
+                        {{ form.client }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_subtotal">Subtotal:</label>
+                        {{ form.subtotal }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_iva">IVA:</label>
+                        {{ form.iva }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_total">Total a pagar:</label>
+                        {{ form.total }}
+                    </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!--/.col (right) -->
+        </div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
