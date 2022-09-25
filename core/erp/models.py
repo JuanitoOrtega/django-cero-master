@@ -79,13 +79,24 @@ class Client(models.Model):
 
 class Sale(models.Model):
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, verbose_name='Cliente')
-    date_joined = models.DateField(default=datetime.now, verbose_name="Fecha de venta")
+    date_joined = models.DateField(verbose_name="Fecha de venta")
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Subtotal')
     iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='IVA')
     total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Total')
 
     def __str__(self):
         return self.client.first_name
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['client'] = self.client.toJSON()
+        item['subtotal'] = format(self.subtotal, '.2f')
+        item['iva'] = format(self.iva, '.2f')
+        item['total'] = format(self.total, '.2f')
+        item['date_joined'] = self.date_joined.strftime('%Y-%m-%d')
+        # Otra forma de acceder a los detalles de una venta
+        item['details'] = [i.toJSON() for i in self.detailsale_set.all()]
+        return item
 
     class Meta:
         verbose_name = 'Venta'
@@ -102,6 +113,13 @@ class DetailSale(models.Model):
 
     def __str__(self):
         return self.product.product_name
+
+    def toJSON(self):
+        item = model_to_dict(self, exclude=['sale'])
+        item['product'] = self.product.toJSON()
+        item['price'] = format(self.price, '.2f')
+        item['subtotal'] = format(self.subtotal, '.2f')
+        return item
 
     class Meta:
         verbose_name = 'Detalle de Venta'

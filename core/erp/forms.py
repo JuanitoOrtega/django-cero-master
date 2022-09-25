@@ -225,12 +225,12 @@ class SaleForm(ModelForm):
         # self.fields['client'].widget.attrs['style'] = 'width: 100%'
 
         # Otra forma de agregrar atributos
-        self.fields['date_joined'].widget.attrs = {
-            'class': 'form-control datetimepicker-input',
-            'id': 'id_date_joined',
-            'data-target': '#date_joined',
-            'data-toggle': 'datetimepicker',
-        }
+        # self.fields['date_joined'].widget.attrs = {
+        #     'class': 'form-control datetimepicker-input',
+        #     'id': 'id_date_joined',
+        #     'data-target': '#id_date_joined',
+        #     'data-toggle': 'datetimepicker',
+        # }
         self.fields['subtotal'].widget.attrs = {
             'readonly': True,
             'class': 'form-control',
@@ -254,6 +254,16 @@ class SaleForm(ModelForm):
                 attrs={
                     'type': 'number',
                     'class': 'form-control',
+                }
+            ),
+            'date_joined': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'id_date_joined',
+                    'data-target': '#id_date_joined',
+                    'data-toggle': 'datetimepicker',
                 }
             )
         }

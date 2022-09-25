@@ -63,3 +63,33 @@ function submit_with_ajax(url, title, content, parameters, callback) {
         }
     });
 }
+
+function alert_action(title, content, callback) {
+    $.confirm({
+        theme: 'modern',
+        title: title,
+        icon: 'fa fa-bell',
+        content: content,
+        columnClass: 'medium',
+        typeAnimated: true,
+        cancelButtonClass: 'btn-primary',
+        draggable: false,
+        dragWindowBorder: false,
+        buttons: {
+            info: {
+                text: "Si",
+                btnClass: 'btn-primary',
+                action: function () {
+                    callback();
+                }
+            },
+            danger: {
+                text: "No",
+                btnClass: 'btn-red',
+                action: function () {
+
+                }
+            }
+        }
+    });
+}
