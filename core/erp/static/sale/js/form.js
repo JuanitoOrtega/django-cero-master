@@ -13,8 +13,8 @@ let sale = {
     let subtotal = 0.00;
     let iva = $('input[name="iva"]').val();
     $.each(this.items.products, function (pos, dict) {
-      // console.log(pos);
-      // console.log(dict);
+      console.log(pos);
+      console.log(dict);
       dict.pos = pos;
       dict.subtotal = dict.quantity * parseFloat(dict.price);
       subtotal += dict.subtotal;
@@ -88,8 +88,8 @@ let sale = {
         }
       ],
       rowCallback( row, data, displayNum, displayIndex, dataIndex ) {
-        // console.log(row);
-        // console.log(data);
+        console.log(row);
+        console.log(data);
         $(row).find("input[name='quantity']").TouchSpin({
           min: 1,
           max: 1000000,
@@ -109,13 +109,13 @@ $(function() {
     language: 'es'
   });
 
-  $('#id_date_joined').datetimepicker({
-    locale: 'es',
-    format: 'YYYY-MM-DD',
-    // date: moment().format('YYYY-MM-DD'),
-    minDate: moment().format('YYYY-MM-DD'),
-    // maxDate: moment().format('YYYY-MM-DD')
-  });
+  // $('#id_date_joined').datetimepicker({
+  //   locale: 'es',
+  //   format: 'YYYY-MM-DD',
+  //   // date: moment().format('YYYY-MM-DD'),
+  //   minDate: moment().format('YYYY-MM-DD'),
+  //   // maxDate: moment().format('YYYY-MM-DD')
+  // });
 
   $("input[name='iva']").TouchSpin({
     min: 0,
@@ -126,8 +126,8 @@ $(function() {
     maxboostedstep: 10,
     postfix: '%'
   }).on('change', function () {
-    // console.clear();
-    // console.log($(this).val());
+    console.clear();
+    console.log($(this).val());
     sale.calculus();
   }).val('13.00');
 
@@ -154,11 +154,11 @@ $(function() {
     minLength: 1,
     select: function(event, ui) {
       event.preventDefault();
-      // console.log(ui.item);
+      console.log(ui.item);
       console.clear();
       ui.item.quantity = 1;
       ui.item.subtotal = 0.00;
-      // console.log(sale.items);
+      console.log(sale.items);
       sale.add(ui.item);
       $(this).val('');
     }
@@ -184,7 +184,7 @@ $(function() {
     .on('change', 'input[name="quantity"]', function () {
       console.clear();
       let quantity = parseInt($(this).val());
-      // console.log(quantity);
+      console.log(quantity);
       let tr = tblProducts.cell($(this).closest('td, li')).index();
       sale.items.products[tr.row].quantity = quantity;
       sale.calculus();
@@ -200,7 +200,7 @@ $(function() {
     e.preventDefault();
 
     if(sale.items.products.length === 0){
-      message_error('Debe al menos tener un item en su detalle de venta');
+      message_error('Debe al menos cargar un item para registrar una venta.');
       return false;
     }
 
@@ -213,5 +213,5 @@ $(function() {
         location.href = '/erp/sale/list/';
     });
   });
-  sale.list();
+  // sale.list();
 });

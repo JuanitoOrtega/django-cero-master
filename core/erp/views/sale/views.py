@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from core.erp.forms import SaleForm
 from core.erp.mixins import ValidatePermissionRequiredMixin
@@ -102,6 +102,77 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
         context['subtitle'] = 'Creación de una venta'
         context['list_url'] = self.success_url
         context['action'] = 'add'
+        context['detail'] = []
+        return context
+
+
+class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, UpdateView):
+    model = Sale
+    form_class = SaleForm
+    template_name = 'sale/create.html'
+    success_url = reverse_lazy('erp:sale_list')
+    permission_required = 'erp.change_sale'
+    url_redirect = success_url
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'search_products':
+                data = []
+                prods = Product.objects.filter(product_name__icontains=request.POST['term'])[0:10]
+                for i in prods:
+                    item = i.toJSON()
+                    item['value'] = i.product_name
+                    data.append(item)
+            elif action == 'edit':
+                with transaction.atomic(): # Si en una parte del proceso ocurre un error, no se guardará nada en la base de datos
+                    venta = json.loads(request.POST['sale'])
+                    # sale = Sale.objects.get(pk=self.get_object().id) # Una forma de hacerlo
+                    sale = self.get_object()
+                    sale.date_joined = venta['date_joined']
+                    sale.client_id = venta['client']
+                    sale.subtotal = float(venta['subtotal'])
+                    sale.iva = float(venta['iva'])
+                    sale.total = float(venta['total'])
+                    sale.save()
+                    sale.detailsale_set.all().delete()
+                    for i in venta['products']:
+                        detail = DetailSale()
+                        detail.sale_id = sale.id
+                        detail.product_id = i['id']
+                        detail.quantity = int(i['quantity'])
+                        detail.price = float(i['price'])
+                        detail.subtotal = float(i['subtotal'])
+                        detail.save()
+            else:
+                data['error'] = 'No ha ingresado a ninguna opción.'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+    def get_details_product(self):
+        data = []
+        try:
+            for i in DetailSale.objects.filter(sale_id=self.get_object().id):
+                item = i.product.toJSON()
+                item['quantity'] = i.quantity
+                data.append(item)
+        except:
+            pass
+        return data
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Ventas'
+        context['subtitle'] = 'Edición de una venta'
+        context['list_url'] = self.success_url
+        context['action'] = 'edit'
+        context['detail'] = json.dumps(self.get_details_product())
         return context
 
 

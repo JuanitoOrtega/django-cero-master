@@ -1,8 +1,37 @@
 let tblSales;
 
+function format(d) {
+    // `d` is the original data object for the row
+    console.log(d);
+    let html = '<table class="table">';
+    html += '<thead class="thead-dark">';
+    html += '<tr>';
+    html += '<th scope="col">Producto</th>';
+    html += '<th scope="col">Categoría</th>';
+    html += '<th scope="col">Precio</th>';
+    html += '<th scope="col">Cantidad</th>';
+    html += '<th scope="col">Subtotal</th>';
+    html += '</tr>';
+    html += '</thead>';
+    html += '<tbody>';
+    $.each(d.details, function (key, value) {
+        html += '<tr>';
+        html += '<th scope="row">'+value.product.product_name+'</th>';
+        html += '<td>'+value.product.category.name+'</td>';
+        html += '<td>'+value.product.price+'</td>';
+        html += '<td>'+value.quantity+'</td>';
+        html += '<td>'+value.subtotal+'</td>';
+        html += '</tr>';
+    });
+    html += '</tbody>';
+    html += '</table>';
+    return html;
+}
+
 $(function () {
     tblSales = $('#data').DataTable({
-        responsive: true,
+        // responsive: true,
+        scrollX: true,
         autoWidth: false,
         destroy: true,
         deferRender: true,
@@ -18,6 +47,13 @@ $(function () {
             dataSrc: ""
         },
         columns: [
+            // Aplicando Child rows de datatables para ver el detalle de las ventas
+            {
+                className: 'dt-control',
+                orderable: false,
+                data: null,
+                defaultContent: '',
+            },
             {"data": "id"},
             {"data": "client.first_name"},
             {"data": "client.last_name"},
@@ -27,6 +63,7 @@ $(function () {
             {"data": "total"},
             {"data": "id"},
         ],
+        // order: [[2, 'asc']], // Ordena la lista de ventas
         columnDefs: [
             {
                 targets: [-2, -3, -4],
@@ -42,6 +79,7 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row) {
                     let buttons = '<button type="button" rel="details" class="btn btn-info btn-xs btn-flat"><i class="fas fa-eye"></i></button> ';
+                    buttons += '<a href="/erp/sale/update/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas fa-edit"></i></a> ';
                     buttons += '<a href="/erp/sale/delete/' + row.id + '/" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a> ';
                     return buttons;
                 }
@@ -58,8 +96,8 @@ $(function () {
         // console.log(data);
       
         $('#tblDetail').DataTable({
-            responsive: true,
-            autoWidth: false,
+            scrollX: true,
+            autoWidth: true,
             destroy: true,
             deferRender: true,
             language: {
@@ -105,5 +143,19 @@ $(function () {
         });
 
         $('#detailModal').modal('show');
+
+    }).on('click', 'td.dt-control', function () {
+        let tr = $(this).closest('tr');
+        let row = tblSales.row(tr);
+ 
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format(row.data())).show();
+            tr.addClass('shown');
+        }
     });
 });

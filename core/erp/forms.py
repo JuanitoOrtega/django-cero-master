@@ -252,18 +252,15 @@ class SaleForm(ModelForm):
             ),
             'iva': TextInput(
                 attrs={
-                    'type': 'number',
+                    # 'type': 'number',
                     'class': 'form-control',
                 }
             ),
             'date_joined': DateInput(
-                format='%Y-%m-%d',
+                format='%d/%m/%Y',
                 attrs={
-                    'value': datetime.now().strftime('%Y-%m-%d'),
-                    'class': 'form-control datetimepicker-input',
-                    'id': 'id_date_joined',
-                    'data-target': '#id_date_joined',
-                    'data-toggle': 'datetimepicker',
+                    'value': datetime.now().strftime('%d/%m/%Y'),
+                    'class': 'form-control',
                 }
             )
         }

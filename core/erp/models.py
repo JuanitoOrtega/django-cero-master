@@ -79,7 +79,7 @@ class Client(models.Model):
 
 class Sale(models.Model):
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, verbose_name='Cliente')
-    date_joined = models.DateField(verbose_name="Fecha de venta")
+    date_joined = models.DateField(default=datetime.now, verbose_name="Fecha de venta")
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Subtotal')
     iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='IVA')
     total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Total')
@@ -93,7 +93,7 @@ class Sale(models.Model):
         item['subtotal'] = format(self.subtotal, '.2f')
         item['iva'] = format(self.iva, '.2f')
         item['total'] = format(self.total, '.2f')
-        item['date_joined'] = self.date_joined.strftime('%Y-%m-%d')
+        item['date_joined'] = self.date_joined.strftime('%d/%m/%Y')
         # Otra forma de acceder a los detalles de una venta
         item['details'] = [i.toJSON() for i in self.detailsale_set.all()]
         return item

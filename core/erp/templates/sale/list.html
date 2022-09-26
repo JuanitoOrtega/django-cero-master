@@ -6,10 +6,11 @@
 
 {% block columns %}
     <tr>
+        <th scope="col">Detalle</th>
         <th scope="col">Nro</th>
         <th scope="col">Nombres</th>
         <th scope="col">Apellidos</th>
-        <th scope="col">Fecha de registro</th>
+        <th scope="col">Fecha</th>
         <th scope="col">Subtotal</th>
         <th scope="col">IVA</th>
         <th scope="col">Total</th>
@@ -24,7 +25,7 @@
 {% block javascript %}
     <!-- Modal -->
     <div class="modal fade" id="detailModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog" style="max-width:547px;">
         <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel"><i class="fas fa-shopping-cart"></i> Detalle de venta</h5>
@@ -33,7 +34,7 @@
             </button>
             </div>
             <div class="modal-body">
-                <table id="tblDetail" class="table table-bordered table-striped">
+                <table id="tblDetail" class="table">
                     <thead>
                         <tr>
                             <th>Producto</th>
