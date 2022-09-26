@@ -103,6 +103,33 @@ let sale = {
   }
 }
 
+// Para mejorar el buscador de productos
+function formatRepo (repo) {
+  if (repo.loading) {
+    return repo.text;
+  }
+
+  let $container = $(
+    '<div class="wrapper container">'+
+    '<div class="row">' +
+    '<div class="col-lg-1">' +
+    '<img src="' + repo.image + '" class="img-fluid img-thumbnail d-block mx-auto rounded">' +
+    '</div>' +
+    '<div class="col-lg-11 text-left shadow-sm">' +
+    //'<br>' +
+    '<p style="margin-bottom: 0;">' +
+    'Nombre: <b>' + repo.product_name + '</b><br>' +
+    'Categoría: ' + repo.category.name + '<br>' +
+    'Precio: <span class="badge badge-warning">$'+repo.price+'</span>'+
+    '</p>' +
+    '</div>' +
+    '</div>' +
+    '</div>'
+  );
+
+  return $container;
+}
+
 $(function() {
   $('.select2').select2({
     theme: 'bootstrap4',
@@ -131,8 +158,8 @@ $(function() {
     sale.calculus();
   }).val('13.00');
 
-  // Search products
-  $('input[name="search"]').autocomplete({
+  // Search products sin usar Select2
+  /* $('input[name="search"]').autocomplete({
     source: function (request, response) {
       $.ajax({
         url: window.location.pathname,
@@ -162,7 +189,7 @@ $(function() {
       sale.add(ui.item);
       $(this).val('');
     }
-  });
+  }); */
 
   $('.btnRemoveAll').on('click', function() {
     alert_action('Notificación', '¿Estás seguro que quieres eliminar todos los items?', function () {
@@ -213,5 +240,39 @@ $(function() {
         location.href = '/erp/sale/list/';
     });
   });
+  
   // sale.list();
+
+  // Buscador de productos usando Select2
+  $('select[name="search"]').select2({
+    theme: 'bootstrap4',
+    language: 'es',
+    allowClear: true,
+    ajax: {
+        delay: 500,
+        type: 'POST',
+        url: window.location.pathname,
+        data: function(params) {
+            let queryParameters = {
+                term: params.term,
+                action: 'search_products'
+            }
+            return queryParameters;
+        },
+        processResults: function(data) {
+            return {
+                results: data
+            }
+        }
+    },
+    placeholder: 'Ingrese una descripción',
+    minimumInputLength: 1,
+    templateResult: formatRepo
+  }).on('select2:select', function (e) {
+    let data = e.params.data;
+    data.quantity = 1;
+    data.subtotal = 0.00;
+    sale.add(data);
+    $(this).val('').trigger('change.select2');
+  });
 });

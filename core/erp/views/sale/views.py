@@ -69,7 +69,8 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
                 prods = Product.objects.filter(product_name__icontains=request.POST['term'])[0:10]
                 for i in prods:
                     item = i.toJSON()
-                    item['value'] = i.product_name
+                    # item['value'] = i.product_name
+                    item['text'] = i.product_name # Para buscar productos usando Select2
                     data.append(item)
             elif action == 'add':
                 with transaction.atomic(): # Si en una parte del proceso ocurre un error, no se guardará nada en la base de datos
