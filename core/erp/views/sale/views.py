@@ -15,7 +15,6 @@ import os
 from django.conf import settings
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-from django.contrib.staticfiles import finders
 
 
 class SaleListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
@@ -33,7 +32,7 @@ class SaleListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in Sale.objects.all():
+                for i in Sale.objects.all().order_by('-id'):
                     data.append(i.toJSON())
             elif action == 'search_details_prod':
                 data = []
