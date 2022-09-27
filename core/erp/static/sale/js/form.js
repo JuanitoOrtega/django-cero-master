@@ -196,6 +196,8 @@ $(function() {
       sale.items.products = [];
       sale.list();
       $('.btnRemoveAll').attr('disabled', true);
+    }, function () {
+
     });
   });
 
@@ -206,6 +208,8 @@ $(function() {
       alert_action('Notificación', '¿Estás seguro que quieres eliminar este item?', function () {
         sale.items.products.splice(tr.row, 1);
         sale.list();
+      }, function () {
+
       });
     })
     .on('change', 'input[name="quantity"]', function () {
@@ -236,8 +240,14 @@ $(function() {
     let parameters = new FormData();
     parameters.append('action', $('input[name="action"]').val());
     parameters.append('sale', JSON.stringify(sale.items));
-    submit_with_ajax(window.location.pathname, 'Notificación', '¿Estás seguro que quieres realizar esta acción?', parameters, function () {
+    submit_with_ajax(window.location.pathname, 'Notificación', '¿Estás seguro que quieres realizar esta acción?', parameters, function (response) {
+      alert_action('Notificación', '¿Desea imprimir la factura?', function () {
+        // location.href = '/erp/sale/invoice/pdf/'+response.id+'/';
+        window.open('/erp/sale/invoice/pdf/'+response.id+'/', '_blank');
         location.href = '/erp/sale/list/';
+      }, function () {
+        location.href = '/erp/sale/list/';
+      });
     });
   });
   

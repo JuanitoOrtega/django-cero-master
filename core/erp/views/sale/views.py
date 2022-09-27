@@ -97,6 +97,7 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
                         detail.price = float(i['price'])
                         detail.subtotal = float(i['subtotal'])
                         detail.save()
+                    data = {'id': sale.id}
             else:
                 data['error'] = 'No ha ingresado a ninguna opción.'
         except Exception as e:
@@ -156,6 +157,7 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
                         detail.price = float(i['price'])
                         detail.subtotal = float(i['subtotal'])
                         detail.save()
+                    data = {'id': sale.id}
             else:
                 data['error'] = 'No ha ingresado a ninguna opción.'
         except Exception as e:

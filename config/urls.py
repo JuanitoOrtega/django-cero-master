@@ -27,6 +27,7 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     # path('login/', LoginFormView.as_view()),
     path('login/', include('core.login.urls')),
+    path('reports/', include('core.reports.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

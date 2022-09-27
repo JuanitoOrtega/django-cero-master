@@ -1,0 +1,54 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+    <script type="text/javascript" src="{% static 'plugins/moment/moment.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'daterangepicker/locale/es.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}" />
+    <script type="text/javascript" src="{% static 'sale/js/report.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+                              <div class="card card-primary">
+                                <div class="card-header">
+                                    <h5 class="card-title m-0">
+                                      <i class="fas fa-chart-bar"></i>
+                                      {{ subtitle }}
+                                    </h5>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                  <div class="row">
+                                    <div class="col-lg-4">
+                                      <!-- Date range -->
+                                      <div class="form-group">
+                                        {{ form }}
+                                      </div>
+                                      <!-- /.form group -->
+                                    </div>
+                                  </div>
+                                  <!-- /.row -->
+                                  <hr>
+                                  <table id="data" class="table table-bordered table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Nro</th>
+                                        <th scope="col">Nombres</th>
+                                        <th scope="col">Apellidos</th>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Subtotal</th>
+                                        <th scope="col">IVA</th>
+                                        <th scope="col">Total</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                  <a href="{{ list_url }}" class="btn btn-success btn-flat"><i class="fas fa-sync"></i> Actualizar</a>
+                                </div>
+                              </div>
+                              <!-- /.content -->
+{% endblock %}
