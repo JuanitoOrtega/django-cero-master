@@ -1,1 +1,363 @@
 {% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <script src="{% static 'highcharts-10.2.1/highcharts.js' %}"></script>
+    <script src="{% static 'highcharts-10.2.1/modules/exporting.js' %}"></script>
+    <script src="{% static 'highcharts-10.2.1/modules/export-data.js' %}"></script>
+    <script src="{% static 'highcharts-10.2.1/modules/accessibility.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="card card-primary">
+      <div class="card-header">
+          <h5 class="card-title m-0">
+              <i class="fas fa-chart-bar"></i>
+              {{ subtitle }}
+          </h5>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <figure class="highcharts-figure">
+          <div id="container-a">
+          </div>
+        </figure>
+      </div>
+    </div>
+    <!-- /.content -->
+
+    <!-- Usando AJAX para mostrar el gráfico -->
+    <div class="card card-primary">
+      <div class="card-header">
+          <h5 class="card-title m-0">
+              <i class="fas fa-chart-bar"></i>
+              {{ subtitleb }}
+          </h5>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <figure class="highcharts-figure">
+          <div id="container-b">
+          </div>
+        </figure>
+      </div>
+    </div>
+    <!-- /.content -->
+
+    <!-- Gráfico Tipo Pie usando AJAX -->
+    <div class="card card-primary">
+      <div class="card-header">
+          <h5 class="card-title m-0">
+              <i class="fas fa-chart-bar"></i>
+              {{ subtitlepie }}
+          </h5>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <figure class="highcharts-figure">
+          <div id="container-pie">
+          </div>
+        </figure>
+      </div>
+    </div>
+    <!-- /.content -->
+
+    <!-- Gráfico Live usando AJAX -->
+    <div class="card card-primary">
+      <div class="card-header">
+          <h5 class="card-title m-0">
+              <i class="fas fa-chart-bar"></i>
+              {{ subtitlelive }}
+          </h5>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <figure class="highcharts-figure">
+          <div id="container-live">
+          </div>
+        </figure>
+      </div>
+    </div>
+    <!-- /.content -->
+
+    <script type="text/javascript">
+      Highcharts.chart('container-a', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Reporte de ventas del año 2022'
+        },
+        subtitle: {
+            text: 'Expresado en Moneda Nacional'
+        },
+        xAxis: {
+            categories: [
+                'Enero',
+                'Febrero',
+                'Marzo',
+                'Abril',
+                'Mayo',
+                'Junio',
+                'Julio',
+                'Agosto',
+                'Septiembre',
+                'Octubre',
+                'Noviembre',
+                'Diciembre'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            title: {
+                useHTML: true,
+                text: 'Valores en $'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="padding:0"><b>{point.y:.1f} $</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [
+          {
+            name: 'Vendido',
+            showInLegend: false,
+            colorByPoint: true,
+            data: {{ graph_sales_year_month|safe }}
+          }
+        ]
+      });
+
+      // Usando AJAX para mostrar el gráfico
+      let graphcolumn = Highcharts.chart('container-b', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Reporte de ventas del año 2022'
+        },
+        subtitle: {
+            text: 'Expresado en Moneda Nacional'
+        },
+        xAxis: {
+            categories: [
+                'Enero',
+                'Febrero',
+                'Marzo',
+                'Abril',
+                'Mayo',
+                'Junio',
+                'Julio',
+                'Agosto',
+                'Septiembre',
+                'Octubre',
+                'Noviembre',
+                'Diciembre'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            title: {
+                useHTML: true,
+                text: 'Valores en $'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="padding:0"><b>{point.y:.1f} $</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        }
+      });
+
+      function get_graph_sales_year_month() {
+        $.ajax({
+          url: window.location.pathname,
+          type: 'POST',
+          data: {
+            'action': 'get_graph_sales_year_month',
+          },
+          dataType: 'json',
+        }).done(function(data) {
+          if (!data.hasOwnProperty('error')) {
+            // console.log(data);
+            graphcolumn.addSeries(data);
+            return false;
+          }
+            message_error(data.error);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+          alert(textStatus + ': ' + errorThrown);
+        }).always(function(data) {
+
+        });
+      }
+
+      // Gráfico Tipo Pie usando AJAX
+      let graphpie = Highcharts.chart('container-pie', {
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'pie'
+        },
+        title: {
+          text: 'Distribución de Ventas año 2022'
+        },
+        tooltip: {
+          pointFormat: '<b>{point.percentage:.1f}%</b>'
+          // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+          point: {
+            valueSuffix: '%'
+          }
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+          }
+        }
+      });
+
+      function get_graph_sales_products_year_moth() {
+        $.ajax({
+          url: window.location.pathname,
+          type: 'POST',
+          data: {
+            'action': 'get_graph_sales_products_year_moth',
+          },
+          dataType: 'json',
+        }).done(function(data) {
+          if (!data.hasOwnProperty('error')) {
+            // console.log(data);
+            graphpie.addSeries(data);
+            return false;
+          }
+            message_error(data.error);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+          alert(textStatus + ': ' + errorThrown);
+        }).always(function(data) {
+
+        });
+      }
+
+      // Gráfico Live
+      Highcharts.chart('container-live', {
+        chart: {
+          type: 'spline',
+          animation: Highcharts.svg, // don't animate in old IE
+          marginRight: 10,
+          events: {
+            load: function () {
+              // set up the updating of the chart each second
+              let series = this.series[0];
+              setInterval(function () {
+                $.ajax({
+                  url: window.location.pathname,
+                  type: 'POST',
+                  data: {
+                    'action': 'get_graph_live',
+                  },
+                  dataType: 'json',
+                }).done(function(data) {
+                  if (!data.hasOwnProperty('error')) {
+                    let x = (new Date()).getTime(); // current time
+                    series.addPoint([x, data.y], true, true);
+                    return false;
+                  }
+                    message_error(data.error);
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                  alert(textStatus + ': ' + errorThrown);
+                }).always(function(data) {
+        
+                });
+              }, 1000);
+            }
+          }
+        },
+        time: {
+          useUTC: false
+        },
+        title: {
+          text: 'Live random data'
+        },
+        accessibility: {
+          announceNewData: {
+            enabled: true,
+            minAnnounceInterval: 15000,
+            announcementFormatter: function (allSeries, newSeries, newPoint) {
+              if (newPoint) {
+                return 'New point added. Value: ' + newPoint.y;
+              }
+              return false;
+            }
+          }
+        },
+        xAxis: {
+          type: 'datetime',
+          tickPixelInterval: 150
+        },
+        yAxis: {
+          title: {
+            text: 'Value'
+          },
+          plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+          }]
+        },
+        tooltip: {
+          headerFormat: '<b>{series.name}</b><br/>',
+          pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+        },
+        legend: {
+          enabled: false
+        },
+        exporting: {
+          enabled: false
+        },
+        series: [{
+          name: 'Random data',
+          data: (function () {
+            // generate an array of random data
+            var data = [],
+              time = (new Date()).getTime(),
+              i;
+            for (i = -19; i <= 0; i += 1) {
+              data.push({
+                x: time + i * 1000,
+                y: Math.random()
+              });
+            }
+            return data;
+          }())
+        }]
+      });
+
+      $(function () {
+        get_graph_sales_year_month();
+        get_graph_sales_products_year_moth();
+      });
+    </script>
+{% endblock %}
