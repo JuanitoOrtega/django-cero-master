@@ -25,7 +25,7 @@
             <input type="hidden" name="action" value="{{ action }}">
             {% for field in form.visible_fields %}
             <div class="form-group">
-                <label for="email">{{ field.label }}</label>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                 {{ field }}
             </div>
             {% endfor %}
