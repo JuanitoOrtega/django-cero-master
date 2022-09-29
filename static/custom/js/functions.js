@@ -41,15 +41,15 @@ function submit_with_ajax(url, title, content, parameters, callback) {
                         dataType: 'json',
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).done(function (data) {
                         if (!data.hasOwnProperty('error')) {
                             callback(data);
                             return false;
                         }
                         message_error(data.error);
-                    }).fail(function(jqXHR, textStatus, errorThrown) {
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
                         alert(textStatus + ': ' + errorThrown);
-                    }).always(function(data) {
+                    }).always(function (data) {
 
                     });
                 }

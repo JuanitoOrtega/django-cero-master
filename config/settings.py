@@ -146,3 +146,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Clase personalizada para gestionar usuarios
 AUTH_USER_MODEL = 'user.User'
+
+# Para trabajar con los objetos dentro de las sesiones
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
