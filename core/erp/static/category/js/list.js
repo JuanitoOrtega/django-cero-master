@@ -16,7 +16,7 @@ $(function() {
       dataSrc: ''
     },
     columns: [
-      {'data': 'id'},
+      {'data': 'position'},
       {'data': 'name'},
       {'data': 'description'},
       {'data': 'id'},

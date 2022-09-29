@@ -19,15 +19,16 @@ function message_error(obj) {
 
 function submit_with_ajax(url, title, content, parameters, callback) {
     $.confirm({
-        theme: 'modern',
+        theme: 'material',
         title: title,
         icon: 'fa fa-bell',
         content: content,
-        columnClass: 'medium',
+        columnClass: 'minimum',
         typeAnimated: true,
         cancelButtonClass: 'btn-primary',
         draggable: false,
         dragWindowBorder: false,
+        type: 'blue',
         buttons: {
             info: {
                 text: "Si",
@@ -66,15 +67,16 @@ function submit_with_ajax(url, title, content, parameters, callback) {
 
 function alert_action(title, content, callback, cancel) {
     $.confirm({
-        theme: 'modern',
+        theme: 'material',
         title: title,
         icon: 'fa fa-bell',
         content: content,
-        columnClass: 'medium',
+        columnClass: 'minimum',
         typeAnimated: true,
         cancelButtonClass: 'btn-primary',
         draggable: false,
         dragWindowBorder: false,
+        type: 'blue',
         buttons: {
             info: {
                 text: "Si",
