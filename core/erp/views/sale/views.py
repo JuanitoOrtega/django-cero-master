@@ -32,8 +32,12 @@ class SaleListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
-                for i in Sale.objects.all().order_by('-id'):
-                    data.append(i.toJSON())
+                position = 1
+                for i in Sale.objects.all().order_by('-date_joined'):
+                    item = i.toJSON()
+                    item['position'] = position
+                    data.append(item)
+                    position += 1
             elif action == 'search_details_prod':
                 data = []
                 for i in DetailSale.objects.filter(sale_id=request.POST['id']):
@@ -75,10 +79,10 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
                 for i in prods:
                     item = i.toJSON()
                     # item['value'] = i.product_name
-                    item['text'] = i.product_name # Para buscar productos usando Select2
+                    item['text'] = i.product_name  # Para buscar productos usando Select2
                     data.append(item)
             elif action == 'add':
-                with transaction.atomic(): # Si en una parte del proceso ocurre un error, no se guardará nada en la base de datos
+                with transaction.atomic():  # Si en una parte del proceso ocurre un error, no se guardará nada en la base de datos
                     venta = json.loads(request.POST['sale'])
                     sale = Sale()
                     sale.date_joined = venta['date_joined']
@@ -137,7 +141,7 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
                     item['value'] = i.product_name
                     data.append(item)
             elif action == 'edit':
-                with transaction.atomic(): # Si en una parte del proceso ocurre un error, no se guardará nada en la base de datos
+                with transaction.atomic():  # Si en una parte del proceso ocurre un error, no se guardará nada en la base de datos
                     venta = json.loads(request.POST['sale'])
                     # sale = Sale.objects.get(pk=self.get_object().id) # Una forma de hacerlo
                     sale = self.get_object()

@@ -54,7 +54,7 @@ $(function () {
                 data: null,
                 defaultContent: '',
             },
-            {"data": "id"},
+            {"data": "position"},
             {"data": "client.first_name"},
             {"data": "client.last_name"},
             {"data": "date_joined"},

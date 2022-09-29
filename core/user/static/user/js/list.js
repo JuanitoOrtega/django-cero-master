@@ -16,21 +16,18 @@ $(function () {
             dataSrc: ''
         },
         columns: [
-            {'data': 'id'},
+            {'data': 'position'},
             {'data': 'image'},
+            {'data': 'full_name'},
             {'data': 'username'},
-            {'data': 'first_name'},
-            {'data': 'last_name'},
             {'data': 'email'},
             {'data': 'date_joined'},
-            {'data': 'last_login'},
-            {'data': 'is_superuser'},
-            {'data': 'is_staff'},
+            {'data': 'groups'},
             {'data': 'id'}
         ],
         columnDefs: [
             {
-                targets: [-10],
+                targets: [-7],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
@@ -38,15 +35,15 @@ $(function () {
                 }
             },
             {
-                targets: [-2,-3],
+                targets: [-2],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    if (data === true) {
-                        return '<i class="fas fa-check-square text-success"></i>';
-                    } else {
-                        return '<i class="fas fa-check-square text-secondary"></i>';
-                    }
+                    let html = '';
+                    $.each(data, function (key, value) {
+                        html += '<span class="badge badge-success">'+ value.name +'</span> ';
+                    });
+                    return html;
                 }
             },
             {

@@ -11,7 +11,7 @@ class UserForm(ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'image']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'image', 'groups']
         labels = {
             'email': 'Correo electrónico',
         }
@@ -49,6 +49,13 @@ class UserForm(ModelForm):
                     'placeholder': 'Ingrese una contraseña',
                     'class': 'form-control',
                 }
+            ),
+            'groups': SelectMultiple(
+                attrs={
+                    'class': 'form-control select2',
+                    'style': 'width: 100%',
+                    'multiple': 'multiple',
+                }
             )
         }
 
@@ -66,6 +73,9 @@ class UserForm(ModelForm):
                     if user.password != pwd:
                         u.set_password(pwd)
                 u.save()
+                u.groups.clear()
+                for g in self.cleaned_data['groups']:
+                    u.groups.add(g)
             else:
                 data['error'] = form.errors
         except Exception as e:
