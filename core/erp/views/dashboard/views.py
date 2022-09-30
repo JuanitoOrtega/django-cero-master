@@ -1,17 +1,19 @@
+from datetime import datetime
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum, FloatField
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models.functions import Coalesce
 from django.views.generic import TemplateView
-from datetime import datetime
 
 from core.erp.models import Sale, Product, DetailSale
 
 from random import randint
 
 
-class DashboardView(TemplateView):
+class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard.html'
 
     # Usando AJAX para mostrar el gráfico
