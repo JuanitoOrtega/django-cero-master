@@ -149,3 +149,12 @@ AUTH_USER_MODEL = 'user.User'
 
 # Para trabajar con los objetos dentro de las sesiones
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+# Configuración para enviar correos
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ortegaj83@gmail.com'
+EMAIL_HOST_PASSWORD = 'telqoxvxatxxhmmj'
+EMAIL_USE_TLS = True
+
+DOMAIN = 'localhost:8000'

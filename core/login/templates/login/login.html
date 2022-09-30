@@ -1,0 +1,68 @@
+{% extends 'login/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="{% url 'index' %}">Bee <b>ERP</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Ingresa tus credenciales para iniciar sesión</p>
+
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    <div class="input-group mb-3">
+                        {{ form.username|add_class:"form-control"|attr:"autocomplete:off"|attr:"placeholder:Usuario" }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ form.password|add_class:"form-control"|attr:"autocomplete:off"|attr:"placeholder:Contraseña" }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                            </button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <p class="my-2">
+                    <a href="{% url 'reset_password' %}">Olvidé mi contraseña</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+        <script type="text/javascript">
+            {% if form.errors %}
+                let errors = '';
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        errors += '{{ error }}\n';
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    errors += '{{ error }}\n';
+                {% endfor %}
+                Swal.fire({
+                    title: 'Error!',
+                    text: errors,
+                    icon: 'error',
+                    confirmButtonText: 'Cerrar'
+                });
+            {% endif %}
+        </script>
+    </div>
+    <!-- /.login-box -->
+{% endblock %}
