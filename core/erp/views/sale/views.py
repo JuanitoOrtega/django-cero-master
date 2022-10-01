@@ -1,7 +1,7 @@
-from turtle import position
 from django.db import transaction
 import json
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -10,7 +10,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, V
 
 from core.erp.forms import SaleForm
 from core.erp.mixins import ValidatePermissionRequiredMixin
-from core.erp.models import DetailSale, Product, Sale
+from core.erp.models import DetailSale, Product, Sale, Client
 
 import os
 from django.conf import settings
@@ -102,6 +102,14 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
                         detail.subtotal = float(i['subtotal'])
                         detail.save()
                     data = {'id': sale.id}
+            elif action == 'search_clients':
+                data = []
+                term = request.POST['term']
+                clients = Client.objects.filter(Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(ci__icontains=term))[0:10]
+                for i in clients:
+                    item = i.toJSON()
+                    item['text'] = i.get_full_name()  # Para buscar productos usando Select2
+                    data.append(item)
             else:
                 data['error'] = 'No ha ingresado a ninguna opción.'
         except Exception as e:
@@ -162,6 +170,14 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
                         detail.subtotal = float(i['subtotal'])
                         detail.save()
                     data = {'id': sale.id}
+            elif action == 'search_clients':
+                data = []
+                term = request.POST['term']
+                clients = Client.objects.filter(Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(ci__icontains=term))[0:10]
+                for i in clients:
+                    item = i.toJSON()
+                    item['text'] = i.get_full_name()  # Para buscar productos usando Select2
+                    data.append(item)
             else:
                 data['error'] = 'No ha ingresado a ninguna opción.'
         except Exception as e:

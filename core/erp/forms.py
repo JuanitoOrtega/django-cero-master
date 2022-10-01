@@ -217,6 +217,7 @@ class AutoSelect2Form(Form):
 class SaleForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['client'].queryset = Client.objects.none()
         for form in self.visible_fields():
             # form.field.widget.attrs['class'] = 'form-control'
             form.field.widget.attrs['autocomplete'] = 'off'

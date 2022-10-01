@@ -65,6 +65,9 @@ class Client(models.Model):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
+    def get_full_name(self):
+        return '{} {} - {}'.format(self.first_name, self.last_name, self.ci)
+
     def toJSON(self):
         item = model_to_dict(self)
         item['gender'] = {'id': self.gender, 'name': self.get_gender_display()}
