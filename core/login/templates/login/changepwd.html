@@ -10,7 +10,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Cambio de contraseña</p>
 
-                <form action="." method="post">
+                <form action=".." method="post">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ next }}">
                     <div class="input-group mb-3">
@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">
-                                <i class="fas fa-paper-plane"></i> Enviar
+                                <i class="fas fa-lock"></i> Cambiar contraseña
                             </button>
                         </div>
                         <!-- /.col -->
@@ -49,15 +49,15 @@
                 $('form').on('submit', function (e) {
                     e.preventDefault();
                     let parameters = new FormData(this);
-                    submit_with_ajax(window.location.pathname, 'Notificación', '¿Estás seguro que quieres resetear tu contraseña?', parameters, function () {
+                    submit_with_ajax(window.location.pathname, 'Notificación', '¿Estás seguro que quieres cambiar tu contraseña?', parameters, function () {
                        Swal.fire({
                            title: 'Notificación!',
-                           text: 'Se envió un correo electrónico con las instrucciones para resetear tu contraseña',
+                           text: 'Tu contraseña ha sido cambiada correctamente.',
                            icon: 'success',
                            timer: 3000,
                            confirmButtonText: 'Cerrar',
                        }).then((result) => {
-                          location.href = '/';
+                          location.href = '{{ login_url }}';
                        });
                     });
                 });

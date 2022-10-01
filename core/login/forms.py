@@ -33,3 +33,11 @@ class ChangePasswordForm(forms.Form):
         'class': 'form-control',
         'autocomplete': 'off',
     }))
+
+    def clean(self):
+        cleaned = super().clean()
+        password = cleaned['password']
+        confirm_password = cleaned['confirm_password']
+        if password != confirm_password:
+            raise forms.ValidationError('Las contraseñas deben ser iguales.')
+        return cleaned

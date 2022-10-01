@@ -157,4 +157,4 @@ EMAIL_HOST_USER = 'ortegaj83@gmail.com'
 EMAIL_HOST_PASSWORD = 'telqoxvxatxxhmmj'
 EMAIL_USE_TLS = True
 
-DOMAIN = 'localhost:8000'
+DOMAIN = ''

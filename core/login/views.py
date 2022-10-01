@@ -84,8 +84,7 @@ class ResetPasswordView(FormView):
     def send_email_reset_pwd(self, user):
         data = {}
         try:
-            url = settings.DOMAIN if not settings.DOMAIN else self.request.META['HTTP_HOST']
-
+            url = settings.DOMAIN if not settings.DEBUG else self.request.META['HTTP_HOST']
             user.token = uuid.uuid4()
             user.save()
 
@@ -94,7 +93,7 @@ class ResetPasswordView(FormView):
             mailServer.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
 
             email_to = user.email
-            mensaje = MIMEMultipart("""Este es el mensaje simple""")
+            mensaje = MIMEMultipart()
             mensaje['From'] = settings.EMAIL_HOST_USER
             mensaje['To'] = email_to
             mensaje['Subject'] = 'Resetear contraseña'
@@ -146,7 +145,14 @@ class ChangePasswordView(FormView):
     def post(self, request, *args, **kwargs):
         data = {}
         try:
-            pass
+            form = ChangePasswordForm(request.POST)
+            if form.is_valid():
+                user = User.objects.get(token=self.kwargs['token'])
+                user.set_password(request.POST['password'])
+                user.token = uuid.uuid4()
+                user.save()
+            else:
+                data['error'] = form.errors
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
@@ -154,4 +160,5 @@ class ChangePasswordView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Resetear contraseña'
+        context['login_url'] = settings.LOGIN_URL
         return context
