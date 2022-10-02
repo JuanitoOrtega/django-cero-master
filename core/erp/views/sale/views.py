@@ -1,6 +1,5 @@
 import json
 import os
-from turtle import position
 
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -64,7 +63,7 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
     form_class = SaleForm
     template_name = 'sale/create.html'
     success_url = reverse_lazy('erp:sale_list')
-    permission_required = 'erp.add_sale'
+    permission_required = 'add_sale'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
@@ -77,8 +76,21 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
             action = request.POST['action']
             if action == 'search_products':
                 data = []
-                prods = Product.objects.filter(product_name__icontains=request.POST['term'])[0:10]
-                for i in prods:
+                term = request.POST['term'].strip()
+                products = Product.objects.filter()
+                if len(term):
+                    products = products.filter(product_name__icontains=term)
+                for i in products[0:10]:
+                    item = i.toJSON()
+                    item['value'] = i.product_name
+                    # item['text'] = i.product_name  # Para buscar productos usando Select2
+                    data.append(item)
+            elif action == 'search_autocomplete':
+                data = []
+                term = request.POST['term'].strip()
+                data.append({'id': term, 'text': term})
+                products = Product.objects.filter(product_name__icontains=term)
+                for i in products[0:10]:
                     item = i.toJSON()
                     # item['value'] = i.product_name
                     item['text'] = i.product_name  # Para buscar productos usando Select2
@@ -156,10 +168,24 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
             action = request.POST['action']
             if action == 'search_products':
                 data = []
-                prods = Product.objects.filter(product_name__icontains=request.POST['term'])[0:10]
-                for i in prods:
+                term = request.POST['term'].strip()
+                products = Product.objects.filter()
+                if len(term):
+                    products = products.filter(product_name__icontains=term)
+                for i in products[0:10]:
                     item = i.toJSON()
                     item['value'] = i.product_name
+                    # item['text'] = i.product_name  # Para buscar productos usando Select2
+                    data.append(item)
+            elif action == 'search_autocomplete':
+                data = []
+                term = request.POST['term'].strip()
+                data.append({'id': term, 'text': term})
+                products = Product.objects.filter(product_name__icontains=term)
+                for i in products[0:10]:
+                    item = i.toJSON()
+                    # item['value'] = i.product_name
+                    item['text'] = i.product_name  # Para buscar productos usando Select2
                     data.append(item)
             elif action == 'edit':
                 with transaction.atomic():  # Si en una parte del proceso ocurre un error, no se guardará nada en la base de datos

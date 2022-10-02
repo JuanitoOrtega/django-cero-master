@@ -1,5 +1,5 @@
 let tblProducts;
-
+let tblSearchProducts;
 let sale = {
     items: {
         client: '',
@@ -23,6 +23,7 @@ let sale = {
         this.items.subtotal = subtotal;
         this.items.iva = this.items.subtotal * (iva / 100);
         this.items.total = this.items.subtotal + this.items.iva;
+
         $('input[name="subtotal"]').val(this.items.subtotal.toFixed(2));
         $('input[name="ivacalculado"]').val(this.items.iva.toFixed(2));
         $('input[name="total"]').val(this.items.total.toFixed(2));
@@ -34,6 +35,7 @@ let sale = {
     },
     list: function () {
         this.calculus();
+        // Mi código
         if (sale.items.products.length === 0) {
             $('.btnRemoveAll').attr('disabled', true);
         }
@@ -100,6 +102,8 @@ let sale = {
                 // alert('Tabla cargada');
             }
         });
+        console.clear();
+        console.log(this.items);
     }
 }
 
@@ -109,7 +113,11 @@ function formatRepo(repo) {
         return repo.text;
     }
 
-    let $container = $(
+    if (!Number.isInteger(repo.id)) {
+        return repo.text;
+    }
+
+    let container = $(
         '<div class="wrapper container">' +
         '<div class="row">' +
         '<div class="col-lg-1">' +
@@ -127,7 +135,7 @@ function formatRepo(repo) {
         '</div>'
     );
 
-    return $container;
+    return container;
 }
 
 $(function () {
@@ -164,7 +172,7 @@ $(function () {
         language: 'es',
         allowClear: true,
         ajax: {
-            delay: 500,
+            delay: 250,
             type: 'POST',
             url: window.location.pathname,
             data: function (params) {
@@ -274,6 +282,75 @@ $(function () {
         $('input[name="search"]').val('').focus();
     });
 
+    $('.btnSearchProducts').on('click', function () {
+        tblSearchProducts = $('#tblSearchProducts').DataTable({
+            responsive: true,
+            autoWidth: false,
+            destroy: true,
+            deferRender: true,
+            language: {
+                url: '../../../../../static/datatables/lang/es-ES.json'
+            },
+            ajax: {
+                url: window.location.pathname,
+                type: 'POST',
+                data: {
+                    'action': 'search_products',
+                    'term': $('select[name="search"]').val()
+                },
+                dataSrc: ""
+            },
+            columns: [
+                {"data": "product_name"},
+                {"data": "category.name"},
+                {"data": "image"},
+                {"data": "price"},
+                {"data": "id"},
+            ],
+            columnDefs: [
+                {
+                    targets: [-3],
+                    class: 'text-center',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        return '<img src="'+data+'" class="img-fluid d-block mx-auto" style="width: 40px; height: 40px;">';
+                    }
+                },
+                {
+                    targets: [-2],
+                    class: 'text-center',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        return '$'+parseFloat(data).toFixed(2);
+                    }
+                },
+                {
+                    targets: [-1],
+                    class: 'text-center',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        return '<button type="button" rel="add" class="btn btn-primary btn-xs btn-flat"><i class="fas fa-plus"></i></button>';
+                    }
+                },
+            ],
+            initComplete: function (settings, json) {
+    
+            }
+        });
+        $('#myModalSearchProducts').modal('show');
+    });
+
+    // Agregar productos desde el modal
+    $('#tblSearchProducts tbody').on('click', 'button[rel="add"]', function () {
+        // console.clear();
+        let tr = tblSearchProducts.cell($(this).closest('td, li')).index();
+        let product = tblSearchProducts.row(tr.row).data();
+        product.quantity = 1;
+        product.subtotal = 0.00;
+        sale.add(product);
+        // console.log(product);
+    });
+
     // Event submit
     $('#formSale').on('submit', function (e) {
         e.preventDefault();
@@ -299,21 +376,19 @@ $(function () {
         });
     });
 
-    // sale.list();
-
     // Buscador de productos usando Select2
     $('select[name="search"]').select2({
         theme: 'bootstrap4',
         language: 'es',
         allowClear: true,
         ajax: {
-            delay: 500,
+            delay: 250,
             type: 'POST',
             url: window.location.pathname,
             data: function (params) {
                 let queryParameters = {
                     term: params.term,
-                    action: 'search_products'
+                    action: 'search_autocomplete'
                 }
                 return queryParameters;
             },
@@ -328,10 +403,14 @@ $(function () {
         templateResult: formatRepo
     }).on('select2:select', function (e) {
         let data = e.params.data;
+        if (!Number.isInteger(data.id)) {
+            return false;
+        }
         data.quantity = 1;
         data.subtotal = 0.00;
         sale.add(data);
         $(this).val('').trigger('change.select2');
     });
+
     sale.list();
 });

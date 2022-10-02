@@ -50,18 +50,19 @@
                         <div class="form-group">
                             <label for="products">Buscador de productos:</label>
                             <div class="input-group">
-                                <select name="search" id="products" class="form-control select2" style="width: 100%;">
-
-                                </select>
-                                <!-- Buscador de productos usando Select2 -->
-                                <!-- <input type="text" name="search" id="products" class="form-control" placeholder="Buscar producto..." autocomplete="off">
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-info btnClearSearch" data-toggle="tooltip" data-placement="top" title="Limpiar"><i class="fas fa-eraser"></i></button>
-                                </span> -->
+                                <select name="search" id="products" class="form-control select2"></select>
+                                <!-- <input type="text" class="form-control" autocomplete="off" placeholder="Ingresa una descripción" maxlength="50" name="search"> -->
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Opciones</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item btnSearchProducts"><i class="fas fa-search"></i> Buscar productos</a>
+                                        <a class="dropdown-item btnClearSearch"><i class="fas fa-broom"></i> Limpiar búsqueda</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <hr>
-                        <table id="tblProducts" class="table table-bordered table-striped">
+                        <table id="tblProducts" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Quitar</th>
@@ -73,10 +74,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
                             </tbody>
                         </table>
-                        
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -144,7 +143,38 @@
     <!-- /.content -->
 </form>
 
-<!-- Modal -->
+<!-- Modal Buscar Productos -->
+<div class="modal fade" id="myModalSearchProducts" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-search"></i> Buscar productos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formClient" enctype="multipart/form-data" method="post">
+                <div class="modal-body">
+                    <table id="tblSearchProducts" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Imagen</th>
+                                <th>Precio</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Create Client -->
 <div class="modal fade" id="myModalClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
