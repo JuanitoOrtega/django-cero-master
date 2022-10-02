@@ -184,6 +184,26 @@ $(function () {
         minimumInputLength: 1
     });
 
+    $('.btnAddClient').on('click', function () {
+        $('#myModalClient').modal('show');
+    });
+
+    $('#myModalClient').on('hidden.bs.modal', function (e) {
+        $('#formClient').trigger('reset');
+    })
+
+    $('#formClient').on('submit', function (e) {
+        e.preventDefault();
+        let parameters = new FormData(this);
+        parameters.append('action', 'create_cliente');
+        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estás seguro que quieres registrar el nuevo cliente?', parameters, function (response) {
+            console.log(response);
+            let newOption = new Option(response.full_name, response.id, false, true);
+            $('select[name="client"]').append(newOption).trigger('change');
+            $('#myModalClient').modal('hide');
+        });
+    });
+
     // Search products
 
     // Search products sin usar Select2
@@ -255,7 +275,7 @@ $(function () {
     });
 
     // Event submit
-    $('form').on('submit', function (e) {
+    $('#formSale').on('submit', function (e) {
         e.preventDefault();
 
         if (sale.items.products.length === 0) {
@@ -313,4 +333,5 @@ $(function () {
         sale.add(data);
         $(this).val('').trigger('change.select2');
     });
+    sale.list();
 });

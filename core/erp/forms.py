@@ -150,7 +150,8 @@ class ClientForm(ModelForm):
         form = super()
         try:
             if form.is_valid():
-                form.save()
+                instance = form.save()
+                data = instance.toJSON()
             else:
                 data['error'] = form.errors
         except Exception as e:
@@ -247,8 +248,8 @@ class SaleForm(ModelForm):
         widgets = {
             'client': Select(
                 attrs={
-                    'class': 'form-control select2',
-                    'style': 'width: 100%',
+                    'class': 'custom-select select2',
+                    # 'style': 'width: 100%',
                 }
             ),
             'iva': TextInput(

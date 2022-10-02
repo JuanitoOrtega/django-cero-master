@@ -1,27 +1,28 @@
-from django.db import transaction
 import json
+import os
+from turtle import position
+
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.template.loader import get_template
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
+from xhtml2pdf import pisa
 
-from core.erp.forms import SaleForm
+from core.erp.forms import ClientForm, SaleForm
 from core.erp.mixins import ValidatePermissionRequiredMixin
 from core.erp.models import DetailSale, Product, Sale, Client
-
-import os
-from django.conf import settings
-from django.template.loader import get_template
-from xhtml2pdf import pisa
 
 
 class SaleListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Sale
     template_name = 'sale/list.html'
-    permission_required = 'erp.view_sale'
+    permission_required = 'view_sale'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -110,6 +111,10 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
                     item = i.toJSON()
                     item['text'] = i.get_full_name()  # Para buscar productos usando Select2
                     data.append(item)
+            elif action == 'create_cliente':
+                with transaction.atomic():
+                    form_client = ClientForm(request.POST)
+                    data = form_client.save()
             else:
                 data['error'] = 'No ha ingresado a ninguna opción.'
         except Exception as e:
@@ -123,6 +128,7 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
         context['list_url'] = self.success_url
         context['action'] = 'add'
         context['detail'] = []
+        context['form_client'] = ClientForm()
         return context
 
 
@@ -131,12 +137,18 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
     form_class = SaleForm
     template_name = 'sale/create.html'
     success_url = reverse_lazy('erp:sale_list')
-    permission_required = 'erp.change_sale'
+    permission_required = 'change_sale'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+    def get_form(self, form_class=None):
+        instance = self.get_object()
+        form = SaleForm(instance=instance)
+        form.fields['client'].queryset = Client.objects.filter(id=instance.client.id)
+        return form
 
     def post(self, request, *args, **kwargs):
         data = {}
@@ -178,6 +190,10 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
                     item = i.toJSON()
                     item['text'] = i.get_full_name()  # Para buscar productos usando Select2
                     data.append(item)
+            elif action == 'create_cliente':
+                with transaction.atomic():
+                    form_client = ClientForm(request.POST)
+                    data = form_client.save()
             else:
                 data['error'] = 'No ha ingresado a ninguna opción.'
         except Exception as e:
@@ -202,6 +218,7 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
         context['list_url'] = self.success_url
         context['action'] = 'edit'
         context['detail'] = json.dumps(self.get_details_product())
+        context['form_client'] = ClientForm()
         return context
 
 

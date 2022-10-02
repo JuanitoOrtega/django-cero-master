@@ -1,7 +1,6 @@
 let tblSales;
 
 function format(d) {
-    // `d` is the original data object for the row
     console.log(d);
     let html = '<table class="table">';
     html += '<thead class="thead-dark">';
@@ -30,7 +29,6 @@ function format(d) {
 
 $(function () {
     tblSales = $('#data').DataTable({
-        // responsive: true,
         scrollX: true,
         autoWidth: false,
         destroy: true,
@@ -79,7 +77,7 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row) {
                     let buttons = '<a href="/erp/sale/invoice/pdf/' + row.id + '/" target="_blank" class="btn btn-primary btn-xs btn-flat"><i class="fas fa-file-pdf"></i></a> ';
-                    buttons += '<button type="button" rel="details" class="btn btn-info btn-xs btn-flat"><i class="fas fa-eye"></i></button> ';
+                    buttons += '<button rel="details" class="btn btn-info btn-xs btn-flat"><i class="fas fa-eye"></i></button> ';
                     buttons += '<a href="/erp/sale/update/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas fa-edit"></i></a> ';
                     buttons += '<a href="/erp/sale/delete/' + row.id + '/" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a>';
                     return buttons;
@@ -150,11 +148,9 @@ $(function () {
         let row = tblSales.row(tr);
  
         if (row.child.isShown()) {
-            // This row is already open - close it
             row.child.hide();
             tr.removeClass('shown');
         } else {
-            // Open this row
             row.child(format(row.data())).show();
             tr.addClass('shown');
         }

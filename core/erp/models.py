@@ -63,7 +63,7 @@ class Client(models.Model):
     gender = models.CharField(max_length=10, choices=gender_choices, default='male', verbose_name='Género')
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.get_full_name()
 
     def get_full_name(self):
         return '{} {} - {}'.format(self.first_name, self.last_name, self.ci)
@@ -72,6 +72,7 @@ class Client(models.Model):
         item = model_to_dict(self)
         item['gender'] = {'id': self.gender, 'name': self.get_gender_display()}
         item['birthday'] = self.birthday.strftime('%d/%m/%Y')
+        item['full_name'] = self.get_full_name()
         return item
 
     class Meta:

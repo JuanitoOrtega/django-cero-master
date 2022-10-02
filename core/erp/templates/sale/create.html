@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST">
+<form id="formSale" method="POST">
     <div class="card card-primary">
         <div class="card-header">
             <h5 class="card-title m-0">
@@ -102,7 +102,14 @@
                         </div>
                         <div class="form-group">
                             <label for="id_client">Cliente:</label>
-                            {{ form.client }}
+                            <div class="input-group">
+                                {{ form.client }}
+                                <div class="input-group-append">
+                                    <button class="btn btn-info btnAddClient" type="button">
+                                        <i class="fas fa-user-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="id_subtotal">Subtotal:</label>
@@ -136,9 +143,35 @@
     </div>
     <!-- /.content -->
 </form>
+
+<!-- Modal -->
+<div class="modal fade" id="myModalClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus"></i> Crear nuevo cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formClient" enctype="multipart/form-data" method="post">
+                <div class="modal-body">
+                    {% for field in form_client.visible_fields %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-flat"><i class="fas fa-save"></i> Guardar registro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     sale.items.products = {{ detail|safe }};
-    sale.list();
     if (sale.items.products.length != 0) {
         $('.btnRemoveAll').attr('disabled', false);
     }
