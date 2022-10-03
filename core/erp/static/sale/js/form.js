@@ -9,6 +9,13 @@ let sale = {
         total: 0.00,
         products: []
     },
+    get_ids: function () {
+        let ids = [];
+        $.each(this.items.products, function (key, value) {
+            ids.push(value.id);
+        });
+        return ids;
+    },
     calculus: function () {
         let subtotal = 0.00;
         let iva = $('input[name="iva"]').val();
@@ -49,8 +56,8 @@ let sale = {
             data: this.items.products,
             columns: [
                 {'data': 'id'},
-                {'data': 'product_name'},
-                {'data': 'category.name'},
+                {'data': 'full_name'},
+                {'data': 'stock'},
                 {'data': 'price'},
                 {'data': 'quantity'},
                 {'data': 'subtotal'}
@@ -62,6 +69,17 @@ let sale = {
                     orderable: false,
                     render: function (data, type, row) {
                         return '<button type="button" rel="remove" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></button>';
+                    }
+                },
+                {
+                    targets: [-4],
+                    class: 'text-center',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        if (data > 10) {
+                            return '<span class="badge badge-success">'+ data +'</span>';
+                        }
+                        return '<span class="badge badge-danger">'+ data +'</span>';
                     }
                 },
                 {
@@ -94,7 +112,7 @@ let sale = {
                 console.log(data);
                 $(row).find("input[name='quantity']").TouchSpin({
                     min: 1,
-                    max: 1000000,
+                    max: data.stock,
                     stepinterval: 1,
                 });
             },
@@ -104,6 +122,7 @@ let sale = {
         });
         console.clear();
         console.log(this.items);
+        console.log(this.get_ids());
     }
 }
 
@@ -120,15 +139,15 @@ function formatRepo(repo) {
     let container = $(
         '<div class="wrapper container">' +
         '<div class="row">' +
-        '<div class="col-lg-1">' +
+        '<div class="col-md-2">' +
         '<img src="' + repo.image + '" class="img-fluid img-thumbnail d-block mx-auto rounded">' +
         '</div>' +
-        '<div class="col-lg-11 text-left shadow-sm">' +
+        '<div class="col-md-10 text-left shadow-sm">' +
         //'<br>' +
         '<p style="margin-bottom: 0;">' +
-        'Nombre: <b>' + repo.product_name + '</b><br>' +
-        'Categoría: ' + repo.category.name + '<br>' +
-        'Precio: <span class="badge badge-warning">$' + repo.price + '</span>' +
+        '<b>Nombre:</b> ' + repo.full_name + '<br>' +
+        '<b>Stock:</b> <span class="badge badge-success">' + repo.stock + '</span>' + '<br>' +
+        '<b>Precio:</b> <span class="badge badge-warning">$' + repo.price + '</span>' +
         '</p>' +
         '</div>' +
         '</div>' +
@@ -296,24 +315,36 @@ $(function () {
                 type: 'POST',
                 data: {
                     'action': 'search_products',
+                    'ids': JSON.stringify(sale.get_ids()),
                     'term': $('select[name="search"]').val()
                 },
                 dataSrc: ""
             },
             columns: [
-                {"data": "product_name"},
-                {"data": "category.name"},
+                {"data": "full_name"},
                 {"data": "image"},
+                {"data": "stock"},
                 {"data": "price"},
                 {"data": "id"},
             ],
             columnDefs: [
                 {
-                    targets: [-3],
+                    targets: [-4],
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
                         return '<img src="'+data+'" class="img-fluid d-block mx-auto" style="width: 40px; height: 40px;">';
+                    }
+                },
+                {
+                    targets: [-3],
+                    class: 'text-center',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        if (data > 10) {
+                            return '<span class="badge badge-success">'+ data +'</span>';
+                        }
+                        return '<span class="badge badge-danger">'+ data +'</span>';
                     }
                 },
                 {
@@ -349,6 +380,7 @@ $(function () {
         product.subtotal = 0.00;
         sale.add(product);
         // console.log(product);
+        tblSearchProducts.row($(this).parents('tr')).remove().draw();
     });
 
     // Event submit
@@ -388,7 +420,8 @@ $(function () {
             data: function (params) {
                 let queryParameters = {
                     term: params.term,
-                    action: 'search_autocomplete'
+                    action: 'search_autocomplete',
+                    ids: JSON.stringify(sale.get_ids())
                 }
                 return queryParameters;
             },

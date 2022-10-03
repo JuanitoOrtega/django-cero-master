@@ -20,16 +20,28 @@ $(function () {
             {"data": "product_name"},
             {"data": "category.name"},
             {"data": "image"},
+            {"data": "stock"},
             {"data": "price"},
             {"data": "id"},
         ],
         columnDefs: [
             {
-                targets: [-3],
+                targets: [-4],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
                     return '<img src="'+data+'" class="img-fluid d-block mx-auto" style="width: 40px; height: 40px;">';
+                }
+            },
+            {
+                targets: [-3],
+                class: 'text-center',
+                orderable: false,
+                render: function (data, type, row) {
+                    if (data > 10) {
+                        return '<span class="badge badge-success">'+ data +'</span>';
+                    }
+                    return '<span class="badge badge-danger">'+ data +'</span>';
                 }
             },
             {
@@ -46,7 +58,7 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row) {
                     let buttons = '<a href="/erp/product/update/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas fa-edit"></i></a> ';
-                    buttons += '<a href="/erp/product/delete/' + row.id + '/" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a>';
+                    buttons += '<a href="/erp/product/delete/' + row.id + '/" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a>';
                     return buttons;
                 }
             },

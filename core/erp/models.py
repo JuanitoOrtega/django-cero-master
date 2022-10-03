@@ -1,3 +1,4 @@
+from email.policy import default
 from crum import get_current_user
 from django.db import models
 from datetime import datetime
@@ -31,6 +32,7 @@ class Product(models.Model):
     product_name = models.CharField(max_length=150, unique=True, verbose_name='Nombre')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Categoría')
     image = models.ImageField(upload_to='product/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen del producto')
+    stock = models.IntegerField(default=0, verbose_name='Stock')
     price = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Precio')
 
     def __str__(self):
@@ -38,6 +40,7 @@ class Product(models.Model):
 
     def toJSON(self):
         item = model_to_dict(self)
+        item['full_name'] = '{} / {}'.format(self.product_name, self.category.name)
         item['category'] = self.category.toJSON()
         item['image'] = self.get_image()
         item['price'] = format(self.price, '.2f')
@@ -82,7 +85,7 @@ class Client(models.Model):
 
 
 class Sale(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, verbose_name='Cliente')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Cliente')
     date_joined = models.DateField(default=datetime.now, verbose_name="Fecha de venta")
     subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Subtotal')
     iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='IVA')
@@ -101,6 +104,12 @@ class Sale(models.Model):
         # Otra forma de acceder a los detalles de una venta
         item['details'] = [i.toJSON() for i in self.detailsale_set.all()]
         return item
+
+    def delete(self, using=None, keep_parents=False):
+        for det in self.detailsale_set.all():
+            det.product.stock += det.quantity
+            det.product.save()
+        super(Sale, self).delete()
 
     class Meta:
         verbose_name = 'Venta'

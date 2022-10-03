@@ -69,9 +69,14 @@ class ProductForm(ModelForm):
                     'style': 'width: 100%;'
                 }
             ),
-            'image': FileInput(
+            # 'image': FileInput(
+            #     attrs={
+            #         'class': 'form-control-file',
+            #     }
+            # ),
+            'stock': NumberInput(
                 attrs={
-                    'class': 'form-control-file',
+                    'class': 'form-control',
                 }
             ),
             'price': TextInput(
