@@ -1,0 +1,1584 @@
+[
+  {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2022-09-23T12:50:22.553Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "2",
+      "object_repr": "demo",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Superuser status\", \"User permissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2022-09-23T12:54:41.266Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "2",
+      "object_repr": "demo",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"User permissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2022-09-23T13:01:49.831Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "2",
+      "object_repr": "demo",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"User permissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+      "action_time": "2022-09-23T15:37:47.124Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "1",
+      "object_repr": "jortega",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Imagen de perfil\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2022-09-23T18:22:03.363Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "2",
+      "object_repr": "Pan Molde",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Categor\\u00eda\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2022-09-28T15:46:13.079Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "2",
+      "object_repr": "demo",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2022-09-28T16:56:42.940Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "3",
+      "object_repr": "user1",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+      "action_time": "2022-09-28T19:01:28.837Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "4",
+      "object_repr": "user2",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Email address\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+      "action_time": "2022-09-29T13:16:46.172Z",
+      "user": 1,
+      "content_type": 3,
+      "object_id": "1",
+      "object_repr": "Administrador",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+      "action_time": "2022-09-29T13:46:16.680Z",
+      "user": 1,
+      "content_type": 3,
+      "object_id": "2",
+      "object_repr": "Gestor",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+      "action_time": "2022-09-30T18:16:31.585Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "1",
+      "object_repr": "jortega",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Email address\"]}}]"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 1,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 1,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 1,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 1,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 2,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 2,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 2,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 2,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 3,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 3,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 3,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 3,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 4,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 4,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 4,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 4,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 5,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 5,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 5,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 5,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add Categoría",
+      "content_type": 6,
+      "codename": "add_category"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change Categoría",
+      "content_type": 6,
+      "codename": "change_category"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete Categoría",
+      "content_type": 6,
+      "codename": "delete_category"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view Categoría",
+      "content_type": 6,
+      "codename": "view_category"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add Cliente",
+      "content_type": 7,
+      "codename": "add_client"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change Cliente",
+      "content_type": 7,
+      "codename": "change_client"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete Cliente",
+      "content_type": 7,
+      "codename": "delete_client"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view Cliente",
+      "content_type": 7,
+      "codename": "view_client"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add Detalle de Venta",
+      "content_type": 8,
+      "codename": "add_detailsale"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change Detalle de Venta",
+      "content_type": 8,
+      "codename": "change_detailsale"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete Detalle de Venta",
+      "content_type": 8,
+      "codename": "delete_detailsale"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view Detalle de Venta",
+      "content_type": 8,
+      "codename": "view_detailsale"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add Producto",
+      "content_type": 9,
+      "codename": "add_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change Producto",
+      "content_type": 9,
+      "codename": "change_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete Producto",
+      "content_type": 9,
+      "codename": "delete_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view Producto",
+      "content_type": 9,
+      "codename": "view_product"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add Venta",
+      "content_type": 10,
+      "codename": "add_sale"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change Venta",
+      "content_type": 10,
+      "codename": "change_sale"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete Venta",
+      "content_type": 10,
+      "codename": "delete_sale"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view Venta",
+      "content_type": 10,
+      "codename": "view_sale"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+      "name": "Can add user",
+      "content_type": 11,
+      "codename": "add_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+      "name": "Can change user",
+      "content_type": 11,
+      "codename": "change_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+      "name": "Can delete user",
+      "content_type": 11,
+      "codename": "delete_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+      "name": "Can view user",
+      "content_type": 11,
+      "codename": "view_user"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "Administrador",
+      "permissions": [
+        41,
+        42,
+        43,
+        44
+      ]
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "Gestor",
+      "permissions": [
+        1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11,
+        12,
+        5,
+        6,
+        7,
+        8,
+        13,
+        14,
+        15,
+        16,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        17,
+        18,
+        19,
+        20,
+        41,
+        42,
+        43,
+        44
+      ]
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+      "app_label": "auth",
+      "model": "permission"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+      "app_label": "auth",
+      "model": "group"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+      "app_label": "sessions",
+      "model": "session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+      "app_label": "erp",
+      "model": "category"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+      "app_label": "erp",
+      "model": "client"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+      "app_label": "erp",
+      "model": "detailsale"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+      "app_label": "erp",
+      "model": "product"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+      "app_label": "erp",
+      "model": "sale"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+      "app_label": "user",
+      "model": "user"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "7840om3c8pft6zjsmqqwue0p1xqe926c",
+    "fields": {
+      "session_data": ".eJxVjEEOwiAQAP_C2ZBC6S549N43kO2ylaopSWlPxr8bkh70OjOZt4p07DkeVba4JHVVVl1-2UT8lLWJ9KD1XjSXdd-WSbdEn7bqsSR53c72b5Cp5rb1kIQpkIcZeE4OmafeBWPYGoaO0GCPwxCGzoFB7KyEPiAEYSGPVn2-4YU3LA:1obiBi:zAjoheuZVaejwhV3ftN1heIiUNxS6qg4TUXUAVSRpyM",
+      "expire_date": "2022-10-07T12:53:50.924Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "7qdedvdpjjujrczg9bhlsixk4r8rtrnb",
+    "fields": {
+      "session_data": ".eJxNkL9OwzAQxknVAkIqSEi8A12s_G_YgIUBscADRHbu2pimdhXHbEgwgITkrcf74qRF6m13333-fuePya8OjoZ6p2s3Lbnt6tIabEsJ5IKI3OXBTPBqhcoLM3jlaqlZpVXXSsH6FbZXDXvSgM39_-7FwQM1NzW52-QmgSgEyEPkSQi5mKewwIKLRchjRMyyqEiLIkwiEedVLJK8yoowT_MK5kWWIrnJstV2Q-5qDwKCrftU4ymM18-HrrRqI6tVg7QlN-4xvPNhcH7TFz1Tf_RxaTreIdWn7mwgfxnaLc0-dzoHkGpJP24EgtwJ4ILbpiMr3Mh_0mPgxoqvfeb0DtZSSdO1HHTbH76DK9-wNVIrn52yiEXeadkfTv2LWA:1oedJF:PH7GxfakRBSD0iLCk62OFTYeJ_e8CC2UOIqZEHz5vAs",
+      "expire_date": "2022-10-15T14:17:41.306Z"
+    }
+  },
+  {
+    "model": "erp.category",
+    "pk": 1,
+    "fields": {
+      "name": "Lacteos",
+      "description": "Productos derivados de la leche."
+    }
+  },
+  {
+    "model": "erp.category",
+    "pk": 2,
+    "fields": {
+      "name": "Enlatados",
+      "description": "Productos envasados y procesados."
+    }
+  },
+  {
+    "model": "erp.category",
+    "pk": 3,
+    "fields": {
+      "name": "Cereales",
+      "description": "Los mejores cereales para tus niños."
+    }
+  },
+  {
+    "model": "erp.category",
+    "pk": 4,
+    "fields": {
+      "name": "Abarrotes",
+      "description": "Mercadería en general."
+    }
+  },
+  {
+    "model": "erp.category",
+    "pk": 5,
+    "fields": {
+      "name": "Escuela",
+      "description": "Todo lo que necesitas para tus hijos."
+    }
+  },
+  {
+    "model": "erp.category",
+    "pk": 6,
+    "fields": {
+      "name": "Bebidas",
+      "description": "Bebidas naturales y procesadas."
+    }
+  },
+  {
+    "model": "erp.category",
+    "pk": 8,
+    "fields": {
+      "name": "Panadería",
+      "description": "Panes frescos y listos para tu mesa."
+    }
+  },
+  {
+    "model": "erp.category",
+    "pk": 9,
+    "fields": {
+      "name": "Papelería",
+      "description": "Materiales de escritorio para la oficina."
+    }
+  },
+  {
+    "model": "erp.product",
+    "pk": 1,
+    "fields": {
+      "product_name": "Yogurt dietético",
+      "category": 1,
+      "image": "product/2022/09/22/Yogurt.jpeg",
+      "stock": 30,
+      "price": "10.90"
+    }
+  },
+  {
+    "model": "erp.product",
+    "pk": 2,
+    "fields": {
+      "product_name": "Pan Molde",
+      "category": 8,
+      "image": "product/2022/09/22/Pan-molde-miga-extra.jpg",
+      "stock": 0,
+      "price": "11.50"
+    }
+  },
+  {
+    "model": "erp.product",
+    "pk": 3,
+    "fields": {
+      "product_name": "Aceite",
+      "category": 4,
+      "image": "product/2022/09/23/Aceite-fino-900ml.webp",
+      "stock": 20,
+      "price": "11.99"
+    }
+  },
+  {
+    "model": "erp.product",
+    "pk": 4,
+    "fields": {
+      "product_name": "Arroz criollo",
+      "category": 4,
+      "image": "product/2022/09/23/arroz.jpeg",
+      "stock": 0,
+      "price": "8.99"
+    }
+  },
+  {
+    "model": "erp.product",
+    "pk": 5,
+    "fields": {
+      "product_name": "Leche PIL",
+      "category": 1,
+      "image": "product/2022/09/23/Leche-Fresca.jpeg",
+      "stock": 60,
+      "price": "5.50"
+    }
+  },
+  {
+    "model": "erp.product",
+    "pk": 6,
+    "fields": {
+      "product_name": "Coca Cola sin azúcar",
+      "category": 6,
+      "image": "product/2022/09/23/coca-cola.jpg",
+      "stock": 0,
+      "price": "6.00"
+    }
+  },
+  {
+    "model": "erp.product",
+    "pk": 7,
+    "fields": {
+      "product_name": "Sardina",
+      "category": 2,
+      "image": "product/2022/09/26/sardina.jpg",
+      "stock": 10,
+      "price": "11.99"
+    }
+  },
+  {
+    "model": "erp.product",
+    "pk": 8,
+    "fields": {
+      "product_name": "Coca Cola con azúcar",
+      "category": 6,
+      "image": "product/2022/09/26/coca-cola.png",
+      "stock": 30,
+      "price": "7.99"
+    }
+  },
+  {
+    "model": "erp.client",
+    "pk": 1,
+    "fields": {
+      "first_name": "Claudia",
+      "last_name": "Vale",
+      "ci": "209291",
+      "birthday": "1990-09-05",
+      "address": "Trinidad",
+      "gender": "female"
+    }
+  },
+  {
+    "model": "erp.client",
+    "pk": 6,
+    "fields": {
+      "first_name": "Carlos",
+      "last_name": "Palenque",
+      "ci": "324230",
+      "birthday": "1980-11-23",
+      "address": "Calle La Felicidad",
+      "gender": "male"
+    }
+  },
+  {
+    "model": "erp.client",
+    "pk": 8,
+    "fields": {
+      "first_name": "Viviana",
+      "last_name": "Tejerina",
+      "ci": "729323",
+      "birthday": "2022-09-27",
+      "address": "Calle La Angostura",
+      "gender": "female"
+    }
+  },
+  {
+    "model": "erp.client",
+    "pk": 9,
+    "fields": {
+      "first_name": "Eidy",
+      "last_name": "Guzman",
+      "ci": "092323",
+      "birthday": "2022-09-27",
+      "address": "Av. 5to anillo, Av. Grigotá",
+      "gender": "female"
+    }
+  },
+  {
+    "model": "erp.client",
+    "pk": 10,
+    "fields": {
+      "first_name": "Juanito",
+      "last_name": "Ortega",
+      "ci": "6239966",
+      "birthday": "2022-10-01",
+      "address": "Calle La Guardia",
+      "gender": "male"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 1,
+    "fields": {
+      "client": 1,
+      "date_joined": "2022-09-26",
+      "subtotal": "32.48",
+      "iva": "4.22",
+      "total": "36.70"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 2,
+    "fields": {
+      "client": 6,
+      "date_joined": "2022-09-26",
+      "subtotal": "32.97",
+      "iva": "4.29",
+      "total": "37.26"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 3,
+    "fields": {
+      "client": 1,
+      "date_joined": "2022-09-11",
+      "subtotal": "38.98",
+      "iva": "5.07",
+      "total": "44.05"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 4,
+    "fields": {
+      "client": 1,
+      "date_joined": "2022-09-05",
+      "subtotal": "8.99",
+      "iva": "1.17",
+      "total": "10.16"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 5,
+    "fields": {
+      "client": 6,
+      "date_joined": "2022-09-25",
+      "subtotal": "11.99",
+      "iva": "1.56",
+      "total": "13.55"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 6,
+    "fields": {
+      "client": 1,
+      "date_joined": "2022-09-01",
+      "subtotal": "7.99",
+      "iva": "1.04",
+      "total": "9.03"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 7,
+    "fields": {
+      "client": 1,
+      "date_joined": "2022-09-07",
+      "subtotal": "8.99",
+      "iva": "1.17",
+      "total": "10.16"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 8,
+    "fields": {
+      "client": 1,
+      "date_joined": "2022-09-10",
+      "subtotal": "6.00",
+      "iva": "0.78",
+      "total": "6.78"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 9,
+    "fields": {
+      "client": 1,
+      "date_joined": "2022-09-05",
+      "subtotal": "17.99",
+      "iva": "2.34",
+      "total": "20.33"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 10,
+    "fields": {
+      "client": 1,
+      "date_joined": "2022-09-20",
+      "subtotal": "23.99",
+      "iva": "3.12",
+      "total": "27.11"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 11,
+    "fields": {
+      "client": 6,
+      "date_joined": "2022-09-27",
+      "subtotal": "13.99",
+      "iva": "1.82",
+      "total": "15.81"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 12,
+    "fields": {
+      "client": 6,
+      "date_joined": "2022-09-27",
+      "subtotal": "11.99",
+      "iva": "1.56",
+      "total": "13.55"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 13,
+    "fields": {
+      "client": 6,
+      "date_joined": "2022-09-11",
+      "subtotal": "61.96",
+      "iva": "8.05",
+      "total": "70.01"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 14,
+    "fields": {
+      "client": 9,
+      "date_joined": "2022-09-20",
+      "subtotal": "82.35",
+      "iva": "10.71",
+      "total": "93.06"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 15,
+    "fields": {
+      "client": 6,
+      "date_joined": "2022-08-09",
+      "subtotal": "46.49",
+      "iva": "6.04",
+      "total": "52.53"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 16,
+    "fields": {
+      "client": 8,
+      "date_joined": "2022-07-10",
+      "subtotal": "157.87",
+      "iva": "20.52",
+      "total": "178.39"
+    }
+  },
+  {
+    "model": "erp.sale",
+    "pk": 17,
+    "fields": {
+      "client": 8,
+      "date_joined": "2022-06-22",
+      "subtotal": "125.87",
+      "iva": "16.36",
+      "total": "142.23"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 1,
+    "fields": {
+      "sale": 1,
+      "product": 2,
+      "price": "11.50",
+      "quantity": 1,
+      "subtotal": "11.50"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 2,
+    "fields": {
+      "sale": 1,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 1,
+      "subtotal": "11.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 3,
+    "fields": {
+      "sale": 1,
+      "product": 4,
+      "price": "8.99",
+      "quantity": 1,
+      "subtotal": "8.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 4,
+    "fields": {
+      "sale": 2,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 2,
+      "subtotal": "23.98"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 5,
+    "fields": {
+      "sale": 2,
+      "product": 4,
+      "price": "8.99",
+      "quantity": 1,
+      "subtotal": "8.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 6,
+    "fields": {
+      "sale": 3,
+      "product": 4,
+      "price": "8.99",
+      "quantity": 1,
+      "subtotal": "8.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 7,
+    "fields": {
+      "sale": 3,
+      "product": 6,
+      "price": "6.00",
+      "quantity": 3,
+      "subtotal": "18.00"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 8,
+    "fields": {
+      "sale": 3,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 1,
+      "subtotal": "11.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 9,
+    "fields": {
+      "sale": 4,
+      "product": 4,
+      "price": "8.99",
+      "quantity": 1,
+      "subtotal": "8.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 10,
+    "fields": {
+      "sale": 5,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 1,
+      "subtotal": "11.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 11,
+    "fields": {
+      "sale": 6,
+      "product": 8,
+      "price": "7.99",
+      "quantity": 1,
+      "subtotal": "7.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 12,
+    "fields": {
+      "sale": 7,
+      "product": 4,
+      "price": "8.99",
+      "quantity": 1,
+      "subtotal": "8.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 13,
+    "fields": {
+      "sale": 8,
+      "product": 6,
+      "price": "6.00",
+      "quantity": 1,
+      "subtotal": "6.00"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 14,
+    "fields": {
+      "sale": 9,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 1,
+      "subtotal": "11.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 15,
+    "fields": {
+      "sale": 9,
+      "product": 6,
+      "price": "6.00",
+      "quantity": 1,
+      "subtotal": "6.00"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 16,
+    "fields": {
+      "sale": 10,
+      "product": 7,
+      "price": "11.99",
+      "quantity": 1,
+      "subtotal": "11.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 17,
+    "fields": {
+      "sale": 10,
+      "product": 6,
+      "price": "6.00",
+      "quantity": 2,
+      "subtotal": "12.00"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 18,
+    "fields": {
+      "sale": 11,
+      "product": 6,
+      "price": "6.00",
+      "quantity": 1,
+      "subtotal": "6.00"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 19,
+    "fields": {
+      "sale": 11,
+      "product": 8,
+      "price": "7.99",
+      "quantity": 1,
+      "subtotal": "7.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 20,
+    "fields": {
+      "sale": 12,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 1,
+      "subtotal": "11.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 21,
+    "fields": {
+      "sale": 13,
+      "product": 2,
+      "price": "11.50",
+      "quantity": 2,
+      "subtotal": "23.00"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 22,
+    "fields": {
+      "sale": 13,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 1,
+      "subtotal": "11.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 23,
+    "fields": {
+      "sale": 13,
+      "product": 4,
+      "price": "8.99",
+      "quantity": 3,
+      "subtotal": "26.97"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 24,
+    "fields": {
+      "sale": 14,
+      "product": 1,
+      "price": "10.90",
+      "quantity": 1,
+      "subtotal": "10.90"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 25,
+    "fields": {
+      "sale": 14,
+      "product": 2,
+      "price": "11.50",
+      "quantity": 1,
+      "subtotal": "11.50"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 26,
+    "fields": {
+      "sale": 14,
+      "product": 7,
+      "price": "11.99",
+      "quantity": 5,
+      "subtotal": "59.95"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 27,
+    "fields": {
+      "sale": 15,
+      "product": 2,
+      "price": "11.50",
+      "quantity": 3,
+      "subtotal": "34.50"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 28,
+    "fields": {
+      "sale": 15,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 1,
+      "subtotal": "11.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 29,
+    "fields": {
+      "sale": 16,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 12,
+      "subtotal": "143.88"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 30,
+    "fields": {
+      "sale": 16,
+      "product": 6,
+      "price": "6.00",
+      "quantity": 1,
+      "subtotal": "6.00"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 31,
+    "fields": {
+      "sale": 16,
+      "product": 8,
+      "price": "7.99",
+      "quantity": 1,
+      "subtotal": "7.99"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 32,
+    "fields": {
+      "sale": 17,
+      "product": 3,
+      "price": "11.99",
+      "quantity": 3,
+      "subtotal": "35.97"
+    }
+  },
+  {
+    "model": "erp.detailsale",
+    "pk": 33,
+    "fields": {
+      "sale": 17,
+      "product": 4,
+      "price": "8.99",
+      "quantity": 10,
+      "subtotal": "89.90"
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$ADlIvFv5ZQoS3EXWUqObaw$hP2pit6SXEdiB6WCWY4YwFI08Y4yKQP/BuNGi/a8Gnc=",
+      "last_login": "2022-10-01T14:17:41.272Z",
+      "is_superuser": true,
+      "username": "jortega",
+      "first_name": "Juanito",
+      "last_name": "Ortega",
+      "email": "ortegaj83@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2022-09-22T13:19:29Z",
+      "image": "users/2022/09/23/jogman.png",
+      "token": "32f3e65b-3e98-4513-b451-fd50aabe831e",
+      "groups": [
+        1,
+        2
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$ALefV5z6f9zBATDsZcqnWR$49Xrr8iHEn9LN76Qeux4N4Iqi1zTAIjqSMdO58jISh8=",
+      "last_login": "2022-09-29T18:10:49.967Z",
+      "is_superuser": false,
+      "username": "demo",
+      "first_name": "Usuario",
+      "last_name": "Demo",
+      "email": "demo@creativa.dev",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2022-09-22T13:19:50Z",
+      "image": "users/2022/09/28/403024_avatar_boy_male_user_young_icon.png",
+      "token": null,
+      "groups": [
+        2
+      ],
+      "user_permissions": [
+        22
+      ]
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$Kji3ynP3LWNyjej1bJMHO8$DPobzLtijGTatesHVyDsQF1sTLOjQRHqMN+b+Fi7nls=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "user1",
+      "first_name": "Federico",
+      "last_name": "Palacios",
+      "email": "user1@web.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-09-28T16:56:09Z",
+      "image": "users/2022/09/28/4043232_avatar_batman_comics_hero_icon.png",
+      "token": null,
+      "groups": [
+        1
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wiKj1FrbGu7aAF3SOJTDho$ClvPOJ2D9w1YZ8ppuqTPcObNPuQs+M3kKr8BY+xyNpA=",
+      "last_login": "2022-09-29T15:23:00.768Z",
+      "is_superuser": false,
+      "username": "user2",
+      "first_name": "Carla",
+      "last_name": "Estevez",
+      "email": "user2@web.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-09-28T19:00:04Z",
+      "image": "users/2022/09/28/403018_avatar_female_mic_support_user_icon.png",
+      "token": null,
+      "groups": [
+        2
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$xYWcbsCI7wxWUGaP3ezfln$vXdiAPK0kx5G0frrgq5Gdx1vZW9W3pSUatVCL0duTAk=",
+      "last_login": "2022-09-29T15:26:34.673Z",
+      "is_superuser": false,
+      "username": "juanmi",
+      "first_name": "Juan Miguel",
+      "last_name": "Lopez",
+      "email": "juanmi@web.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-09-29T14:40:05.433Z",
+      "image": "users/2022/09/29/403020_avatar_male_support_user_headset_icon.png",
+      "token": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

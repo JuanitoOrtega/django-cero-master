@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
+from weasyprint import HTML, CSS
 from xhtml2pdf import pisa
 
 from core.erp.forms import ClientForm, SaleForm
@@ -285,6 +286,7 @@ class SaleDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Delete
         return context
 
 
+# xhtml2pdf
 class SaleInvoicePdfView(View):
     def link_callback(self, uri, rel):
         """
@@ -332,6 +334,29 @@ class SaleInvoicePdfView(View):
                 link_callback=self.link_callback
             )
             return response
+        except:
+            pass
+        return HttpResponseRedirect(reverse_lazy('erp:sale_list'))
+
+
+# WeasyPrint
+class SaleInvoicePdfWeasyPrintView(View):
+    def get(self, request, *args, **kwargs):
+        try:
+            template = get_template('sale/factura.html')
+            context = {
+                'sale': Sale.objects.get(pk=self.kwargs['pk']),
+                'comp': {
+                    'name': 'BEE ERP SRL',
+                    'nit': '6238877011',
+                    'address': 'Santa Cruz de la Sierra, Bolivia',
+                },
+                'logo': '{}{}'.format(settings.MEDIA_URL, 'logobee.png')
+            }
+            html_template = template.render(context)
+            css_url = os.path.join(settings.BASE_DIR, 'static/bootstrap-4.6.2/css/bootstrap.min.css')
+            pdf = HTML(string=html_template, base_url=request.build_absolute_uri()).write_pdf(stylesheets=[CSS(css_url)])
+            return HttpResponse(pdf, content_type='application/pdf')
         except:
             pass
         return HttpResponseRedirect(reverse_lazy('erp:sale_list'))
