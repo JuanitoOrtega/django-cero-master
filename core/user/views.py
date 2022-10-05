@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View, FormView
 
 from .forms import *
-from core.erp.mixins import ValidatePermissionRequiredMixin
+from core.pos.mixins import ValidatePermissionRequiredMixin
 from core.user.models import User
 
 
@@ -151,14 +151,14 @@ class UserChangeGroup(LoginRequiredMixin, View):
             request.session['group'] = Group.objects.get(pk=self.kwargs['pk'])
         except:
             pass
-        return HttpResponseRedirect(reverse_lazy('erp:dashboard'))
+        return HttpResponseRedirect(reverse_lazy('pos:dashboard'))
 
 
 class UserProfileView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     template_name = 'user/profile.html'
-    success_url = reverse_lazy('erp:dashboard')
+    success_url = reverse_lazy('pos:dashboard')
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):

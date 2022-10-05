@@ -42,11 +42,11 @@ INSTALLED_APPS = [
     # Libs
     'widget_tweaks',
     # Apps
-    'core.erp',
-    'core.homepage',
     'core.login',
-    'core.user',
+    'core.pos',
     'core.reports',
+    'core.user',
+    'core.homepage',
 ]
 
 MIDDLEWARE = [
@@ -135,7 +135,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 # Configuración para iniciar y cerrar sesión
-LOGIN_REDIRECT_URL = '/erp/dashboard/'
+LOGIN_REDIRECT_URL = '/pos/dashboard/'
 LOGOUT_REDIRECT_URL = '/login/'
 LOGIN_URL = '/login/'
 

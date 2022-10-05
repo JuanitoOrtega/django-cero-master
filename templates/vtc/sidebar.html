@@ -2,7 +2,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{% url 'erp:dashboard' %}" class="brand-link">
+            <a href="{% url 'pos:dashboard' %}" class="brand-link">
                 <img src="{% static 'images/logobee.png' %}" alt="Bee ERP" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">Bee ERP</span>
@@ -47,25 +47,25 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{% url 'erp:category_list' %}" class="nav-link {% if '/erp/category/list/' == request.path %}active{% endif %}">
+                                    <a href="{% url 'pos:category_list' %}" class="nav-link {% if '/pos/category/list/' == request.path %}active{% endif %}">
                                         <i class="fas fa-truck-loading nav-icon"></i>
                                         <p>Categorías</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'erp:product_list' %}" class="nav-link {% if '/erp/product/list/' == request.path %}active{% endif %}">
+                                    <a href="{% url 'pos:product_list' %}" class="nav-link {% if '/pos/product/list/' == request.path %}active{% endif %}">
                                         <i class="fas fa-boxes nav-icon"></i>
                                         <p>Productos</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'erp:client_list' %}" class="nav-link {% if '/erp/client/list/' == request.path %}active{% endif %}">
+                                    <a href="{% url 'pos:client_list' %}" class="nav-link {% if '/pos/client/list/' == request.path %}active{% endif %}">
                                         <i class="fas fa-users nav-icon"></i>
                                         <p>Clientes</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'erp:sale_list' %}" class="nav-link {% if '/erp/sale/list/' == request.path %}active{% endif %}">
+                                    <a href="{% url 'pos:sale_list' %}" class="nav-link {% if '/pos/sale/list/' == request.path %}active{% endif %}">
                                         <i class="fas fa-shopping-cart nav-icon"></i>
                                         <p>Ventas</p>
                                     </a>

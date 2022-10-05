@@ -54,7 +54,7 @@
                 </li>
                 <li>
                     {% if request.user.is_authenticated %}
-                    <a href="{% url 'erp:dashboard' %}" class="nav-link"><i class='bx bx-user'></i> <span>Welcome</span></a>
+                    <a href="{% url 'pos:dashboard' %}" class="nav-link"><i class='bx bx-user'></i> <span>Welcome</span></a>
                     {% else %}
                     <a href="{% url 'login' %}" class="nav-link"><i class='bx bx-door-open'></i> <span>Login</span></a>
                     {% endif %}

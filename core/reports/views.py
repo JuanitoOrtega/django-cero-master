@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
-from core.erp.models import Sale
+from core.pos.models import Sale
 from core.reports.forms import ReportForm
 
 

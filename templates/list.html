@@ -56,7 +56,7 @@
         });
         $('.btnRegistro').on('click', function() {
             $.ajax({
-                url: '{% url 'erp:category_list' %}',
+                url: '{% url 'pos:category_list' %}',
                 type: 'POST',
                 data: { id: 1},
                 dataType: 'json'
