@@ -58,9 +58,11 @@ class Product(models.Model):
 
 class Client(models.Model):
     first_name = models.CharField(max_length=150, verbose_name='Nombres')
-    last_name = models.CharField(max_length=200, verbose_name='Apellidos')
+    last_name = models.CharField(max_length=200, null=True, blank=True, verbose_name='Apellidos')
     ci = models.CharField(max_length=10, unique=True, verbose_name='Carnet de identidad')
-    birthday = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
+    email = models.EmailField(max_length=100, null=True, blank=True, verbose_name='Correo electrónico')
+    mobile = models.CharField(max_length=12, null=True, blank=True, verbose_name='Teléfono')
+    birthday = models.DateField(auto_now_add=False, null=True, blank=True, verbose_name='Fecha de nacimiento')
     address = models.CharField(max_length=150, null=True, blank=True, verbose_name='Dirección')
     gender = models.CharField(max_length=10, choices=genders, default='male', verbose_name='Género')
 
@@ -73,7 +75,7 @@ class Client(models.Model):
     def toJSON(self):
         item = model_to_dict(self)
         item['gender'] = {'id': self.gender, 'name': self.get_gender_display()}
-        item['birthday'] = self.birthday.strftime('%Y-%m-%d')
+        item['birthday'] = self.birthday.strftime('%d/%m/%Y')
         item['full_name'] = self.get_full_name()
         return item
 

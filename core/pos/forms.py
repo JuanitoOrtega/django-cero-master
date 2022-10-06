@@ -69,11 +69,6 @@ class ProductForm(ModelForm):
                     'style': 'width: 100%;'
                 }
             ),
-            # 'image': FileInput(
-            #     attrs={
-            #         'class': 'form-control-file',
-            #     }
-            # ),
             'stock': NumberInput(
                 attrs={
                     'class': 'form-control',
@@ -110,7 +105,7 @@ class ClientForm(ModelForm):
 
     class Meta:
         model = Client
-        fields = '__all__'
+        fields = ('first_name', 'last_name', 'ci', 'email', 'mobile', 'birthday', 'address', 'gender')
         widgets = {
             'first_name': TextInput(
                 attrs={
@@ -130,12 +125,23 @@ class ClientForm(ModelForm):
                     'class': 'form-control',
                 }
             ),
-            'birthdate': DateInput(
-                format='%Y-%m-%d',
+            'email': EmailInput(
                 attrs={
-                    'class': 'form-control datetimepicker-input',
-                    'id': 'birthdate',
+                    'placeholder': 'Ingrese Correo electrónico',
+                    'class': 'form-control',
+                }
+            ),
+            'mobile': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese número de teléfono',
+                    'class': 'form-control',
+                }
+            ),
+            'birthday': TextInput(
+                attrs={
+                    # 'type': 'date',
                     'value': datetime.now().strftime('%Y-%m-%d'),
+                    'class': 'form-control datetimepicker-input',
                     'data-toggle': 'datetimepicker',
                     'data-target': '#birthdate',
                 }

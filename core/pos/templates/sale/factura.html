@@ -70,7 +70,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for det in sale.detailsale_set.all %}
+        {% for det in sale.saleproduct_set.all %}
             <tr>
                 <td class="text-center">{{ det.quantity }}</td>
                 <td>{{ det.product.product_name }}</td>

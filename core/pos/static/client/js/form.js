@@ -1,5 +1,5 @@
 $(function () {
-    $('input[name="birthdate"]').datetimepicker({
+    $('input[name="birthday"]').datetimepicker({
         useCurrent: false,
         format: 'YYYY-MM-DD',
         locale: 'es',

@@ -2,6 +2,7 @@
 {% load static %}
 {% block head_list %}
     <!-- Daterangepicker -->
+    <script src="{% static 'plugins/moment/moment.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
     <script src="{% static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
     <script src="{% static 'daterangepicker/locale/es.js' %}"></script>
@@ -11,8 +12,6 @@
 {% block columns %}
     <tr>
         <th scope="col">Número</th>
-        <th scope="col">Detalle</th>
-        <th scope="col">Nro</th>
         <th scope="col">Nombres</th>
         <th scope="col">Apellidos</th>
         <th scope="col">Fecha</th>
@@ -66,7 +65,7 @@
     <div class="row">
         <div class="col-lg-5">
             <div class="form-group">
-                <label>Rangos de fechas:</label>
+                <label>Rango de fechas:</label>
                 <div class="input-group mb-3">
                     {{ form.date_range }}
                     <div class="input-group-append">
@@ -81,5 +80,4 @@
             </div>
         </div>
     </div>
-    <hr>
 {% endblock %}

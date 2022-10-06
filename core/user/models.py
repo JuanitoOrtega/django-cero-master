@@ -21,8 +21,8 @@ class User(AbstractUser):
     def toJSON(self):
         item = model_to_dict(self, exclude=['password', 'user_permissions'])  # Este método tiene limitaciones, no se pueden enviar fechas
         if self.last_login:
-            item['last_login'] = self.last_login.strftime('%Y-%m-%d')
-        item['date_joined'] = self.date_joined.strftime('%Y-%m-%d')
+            item['last_login'] = self.last_login.strftime('%d/%m/%Y')
+        item['date_joined'] = self.date_joined.strftime('%d/%m/%Y')
         item['image'] = self.get_image()
         item['full_name'] = self.get_full_name()
         item['groups'] = [{'id': g.id, 'name': g.name} for g in self.groups.all()]

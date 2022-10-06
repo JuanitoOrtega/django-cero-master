@@ -2,6 +2,7 @@
     background-color: transparent;
 }
 .btnSearchProducts:hover,
-.btnClearSearch:hover {
+.btnClearSearch:hover,
+.btnRemoveAll:hover {
     cursor: pointer;
 }

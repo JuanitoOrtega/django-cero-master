@@ -15,15 +15,15 @@ let sale = {
     calculateInvoice: function () {
         let subtotal = 0.00;
         let iva = $('input[name="iva"]').val();
+        console.log('iva ' + iva);
         this.details.products.forEach(function (value, index, array) {
             value.index = index;
             value.quantity = parseInt(value.quantity);
             value.subtotal = value.quantity * parseFloat(value.price);
             subtotal += value.subtotal;
         });
-
         this.details.subtotal = subtotal;
-        this.details.iva = this.details.subtotal * iva;
+        this.details.iva = this.details.subtotal * (iva / 100);
         this.details.total = this.details.subtotal + this.details.iva;
 
         $('input[name="subtotal"]').val(this.details.subtotal.toFixed(2));
@@ -77,7 +77,7 @@ let sale = {
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
-                        return '<input type="text" name="quantity" class="form-control-sm input-sm" autocomplete="off" value="' + row.quantity + '">';
+                        return '<input type="text" name="quantity" class="form-control-sm input-sm" autocomplete="off" value="' + data + '">';
                     }
                 },
                 {
@@ -98,13 +98,11 @@ let sale = {
                 }
             ],
             rowCallback(row, data, displayNum, displayIndex, dataIndex) {
-
                 $(row).find('input[name="quantity"]').TouchSpin({
                     min: 1,
                     max: data.stock,
                     step: 1
                 });
-
             },
             initComplete: function (settings, json) {
 
@@ -159,7 +157,7 @@ $(function () {
         $('#formClient').trigger('reset');
     });
 
-    $('input[name="birthdate"]').datetimepicker({
+    $('input[name="birthday"]').datetimepicker({
         useCurrent: false,
         format: 'YYYY-MM-DD',
         locale: 'es',
@@ -259,9 +257,9 @@ $(function () {
         })
         .on('change', 'input[name="quantity"]', function () {
             console.clear();
-            let cant = parseInt($(this).val());
+            let quantity = parseInt($(this).val());
             let tr = tblProducts.cell($(this).closest('td, li')).index();
-            sale.details.products[tr.row].cant = cant;
+            sale.details.products[tr.row].quantity = quantity;
             sale.calculateInvoice();
             $('td:last', tblProducts.row(tr.row).node()).html('$' + sale.details.products[tr.row].subtotal.toFixed(2));
         });
@@ -334,7 +332,7 @@ $(function () {
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
-                        return '$'+parseFloat(data).toFixed(2);
+                        return '$' + parseFloat(data).toFixed(2);
                     }
                 },
                 {
@@ -377,15 +375,15 @@ $(function () {
 
     $("input[name='iva']").TouchSpin({
         min: 0,
-        max: 100,
-        step: 0.01,
+        max: 20,
+        step: 1,
         decimals: 2,
         boostat: 5,
         maxboostedstep: 10,
         postfix: '%'
     }).on('change', function () {
         sale.calculateInvoice();
-    }).val(0.12);
+    }).val('13.00');
 
     $('#formSale').on('submit', function (e) {
         e.preventDefault();

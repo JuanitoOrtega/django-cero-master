@@ -7,7 +7,7 @@ let sale = {
             'action': 'search',
             'start_date': input_daterange.data('daterangepicker').startDate.format('YYYY-MM-DD'),
             'end_date': input_daterange.data('daterangepicker').endDate.format('YYYY-MM-DD'),
-        };
+        }
         if (all) {
             parameters['start_date'] = '';
             parameters['end_date'] = '';
@@ -65,7 +65,7 @@ let sale = {
                     targets: [0],
                     class: 'text-center',
                     render: function (data, type, row) {
-                        return '<a class="badge badge-secondary badge-pill pointer" rel="number">' + data + '</a>'
+                        return '<a class="badge badge-secondary badge-pill" rel="number">' + data + '</a>'
                     }
                 }
             ],
@@ -105,7 +105,7 @@ $(function () {
     input_daterange = $('input[name="date_range"]');
 
     input_daterange.daterangepicker({
-        language: 'auto',
+        language: 'es',
         startDate: new Date(),
         locale: {
             format: 'YYYY-MM-DD',
@@ -125,11 +125,11 @@ $(function () {
     $('#data tbody')
         .off()
         .on('click', 'button[rel="details"]', function () {
-        let tr = tblSales.cell($(this).closest('td, li')).index();
-        let data = tblSales.row(tr.row).data();
+        let tr = tblSale.cell($(this).closest('td, li')).index();
+        let data = tblSale.row(tr.row).data();
         // console.log(data);
 
-        $('#tblProducts').DataTable({
+        $('#tblDetail').DataTable({
             scrollX: true,
             autoWidth: true,
             destroy: true,
@@ -180,8 +180,8 @@ $(function () {
         $('#detailModal').modal('show');
 
     }).on('click', 'a[rel="number"]', function () {
-        var tr = $(this).closest('tr');
-        var row = tblSale.row(tr);
+        let tr = $(this).closest('tr');
+        let row = tblSale.row(tr);
         if (row.child.isShown()) {
             row.child.hide();
             tr.removeClass('shown');
