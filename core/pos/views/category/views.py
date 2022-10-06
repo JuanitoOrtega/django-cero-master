@@ -9,10 +9,9 @@ from core.pos.models import Category
 
 # Vistas basadas en clases
 class CategoryListView(ValidatePermissionRequiredMixin, ListView):
-    # permiso requerido
     model = Category
     template_name = 'category/list.html'
-    permission_required = 'pos.view_category'
+    permission_required = 'view_category'
 
     # Sobreescribir el método post
     def post(self, request, *args, **kwargs):
@@ -38,8 +37,8 @@ class CategoryListView(ValidatePermissionRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Categorías'
         context['subtitle'] = 'Lista de categorías'
-        context['create_url'] = reverse_lazy('pos:category_create')
-        context['list_url'] = reverse_lazy('pos:category_list')
+        context['create_url'] = reverse_lazy('category_create')
+        context['list_url'] = reverse_lazy('category_list')
         return context
 
 

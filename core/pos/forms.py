@@ -15,7 +15,7 @@ class CategoryForm(ModelForm):
     class Meta:
         model = Category
         fields = '__all__'
-        exclude = ['user_updated', 'user_creation']
+        # exclude = ['user_updated', 'user_creation']
         widgets = {
             'name': TextInput(
                 attrs={
@@ -130,11 +130,14 @@ class ClientForm(ModelForm):
                     'class': 'form-control',
                 }
             ),
-            'birthday': DateInput(
-                format='%d/%m/%Y',
+            'birthdate': DateInput(
+                format='%Y-%m-%d',
                 attrs={
-                    'value': datetime.now().strftime('%d/%m/%Y'),
-                    'class': 'form-control',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'birthdate',
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'data-toggle': 'datetimepicker',
+                    'data-target': '#birthdate',
                 }
             ),
             'address': TextInput(
@@ -145,7 +148,8 @@ class ClientForm(ModelForm):
             ),
             'gender': Select(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-control select2',
+                    'style': 'width: 100%',
                 }
             )
         }
@@ -264,10 +268,14 @@ class SaleForm(ModelForm):
                 }
             ),
             'date_joined': DateInput(
-                format='%d/%m/%Y',
+                format='%Y-%m-%d',
                 attrs={
-                    'value': datetime.now().strftime('%d/%m/%Y'),
-                    'class': 'form-control',
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'date_joined',
+                    'data-target': '#date_joined',
+                    'data-toggle': 'datetimepicker',
                 }
             )
         }

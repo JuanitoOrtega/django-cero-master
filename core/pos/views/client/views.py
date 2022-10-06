@@ -1,8 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from core.pos.forms import ClientForm
@@ -10,20 +7,16 @@ from core.pos.mixins import ValidatePermissionRequiredMixin
 from core.pos.models import Client
 
 
-class ClientListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
+class ClientListView(ValidatePermissionRequiredMixin, ListView):
     model = Client
     template_name = 'client/list.html'
-    permission_required = 'pos.view_client'
-
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
+    permission_required = 'view_client'
 
     def post(self, request, *args, **kwargs):
         data = {}
         try:
             action = request.POST['action']
-            if action == 'searchdata':
+            if action == 'search':
                 data = []
                 position = 1
                 for i in Client.objects.all():
@@ -41,21 +34,18 @@ class ClientListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListVi
         context = super().get_context_data(**kwargs)
         context['title'] = 'Clientes'
         context['subtitle'] = 'Listado de Clientes'
-        context['create_url'] = reverse_lazy('pos:client_create')
-        context['list_url'] = reverse_lazy('pos:client_list')
+        context['create_url'] = reverse_lazy('client_create')
+        context['list_url'] = reverse_lazy('client_list')
         return context
 
 
-class ClientCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, CreateView):
+class ClientCreateView(ValidatePermissionRequiredMixin, CreateView):
     model = Client
     form_class = ClientForm
     template_name = 'client/create.html'
-    success_url = reverse_lazy('pos:client_list')
-    permission_required = 'pos.add_client'
+    success_url = reverse_lazy('client_list')
+    permission_required = 'add_client'
     url_redirect = success_url
-
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         data = {}
@@ -79,12 +69,12 @@ class ClientCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Crea
         return context
 
 
-class ClientUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, UpdateView):
+class ClientUpdateView(ValidatePermissionRequiredMixin, UpdateView):
     model = Client
     form_class = ClientForm
     template_name = 'client/create.html'
-    success_url = reverse_lazy('pos:client_list')
-    permission_required = 'pos.change_client'
+    success_url = reverse_lazy('client_list')
+    permission_required = 'change_client'
     url_redirect = success_url
 
     def dispatch(self, request, *args, **kwargs):
@@ -113,11 +103,11 @@ class ClientUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Upda
         return context
 
 
-class ClientDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, DeleteView):
+class ClientDeleteView(ValidatePermissionRequiredMixin, DeleteView):
     model = Client
     template_name = 'client/delete.html'
-    success_url = reverse_lazy('pos:client_list')
-    permission_required = 'pos.delete_client'
+    success_url = reverse_lazy('client_list')
+    permission_required = 'delete_client'
     url_redirect = success_url
 
     def dispatch(self, request, *args, **kwargs):

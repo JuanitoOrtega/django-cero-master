@@ -7,7 +7,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{% url 'pos:dashboard' %}" class="nav-link">Inicio</a>
+            <a href="{% url 'dashboard' %}" class="nav-link">Inicio</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contacto</a>
@@ -50,7 +50,7 @@
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                 {% for g in request.user.groups.all %}
                     {% if g.id != request.session.group.id %}
-                    <li><a href="{% url 'user:user_change_group' g.id %}" class="dropdown-item">{{ g.name }}</a></li>
+                    <li><a href="{% url 'user_change_group' g.id %}" class="dropdown-item">{{ g.name }}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -67,11 +67,11 @@
                     Último Acceso: {{ request.user.last_login|date:'d \d\e b \d\e Y' }} a hrs. {{ request.user.last_login|date:'H:i' }}
                 </span>
                 <div class="dropdown-divider"></div>
-                <a href="{% url 'user:user_profile' %}" class="dropdown-item">
+                <a href="{% url 'user_update_profile' %}" class="dropdown-item">
                     <i class="fas fa-edit mr-2"></i> Editar perfil
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{% url 'user:user_change_password' %}" class="dropdown-item">
+                <a href="{% url 'user_change_password' %}" class="dropdown-item">
                     <i class="fas fa-lock mr-2"></i> Editar contraseña
                 </a>
                 <div class="dropdown-divider"></div>

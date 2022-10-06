@@ -201,8 +201,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    sale.items.products = {{ detail|safe }};
-    if (sale.items.products.length != 0) {
+    sale.details.products = {{ detail|safe }};
+    if (sale.details.products.length != 0) {
         $('.btnRemoveAll').attr('disabled', false);
     }
 </script>

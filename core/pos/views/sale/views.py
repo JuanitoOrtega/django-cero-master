@@ -54,8 +54,8 @@ class SaleListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView
         context = super().get_context_data(**kwargs)
         context['title'] = 'Ventas'
         context['subtitle'] = 'Listado de Ventas'
-        context['create_url'] = reverse_lazy('pos:sale_create')
-        context['list_url'] = reverse_lazy('pos:sale_list')
+        context['create_url'] = reverse_lazy('sale_create')
+        context['list_url'] = reverse_lazy('sale_list')
         return context
 
 
@@ -63,7 +63,7 @@ class SaleCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Create
     model = Sale
     form_class = SaleForm
     template_name = 'sale/create.html'
-    success_url = reverse_lazy('pos:sale_list')
+    success_url = reverse_lazy('sale_list')
     permission_required = 'add_sale'
     url_redirect = success_url
 
@@ -154,7 +154,7 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
     model = Sale
     form_class = SaleForm
     template_name = 'sale/create.html'
-    success_url = reverse_lazy('pos:sale_list')
+    success_url = reverse_lazy('sale_list')
     permission_required = 'change_sale'
     url_redirect = success_url
 
@@ -262,7 +262,7 @@ class SaleUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Update
 class SaleDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, DeleteView):
     model = Sale
     template_name = 'sale/delete.html'
-    success_url = reverse_lazy('pos:sale_list')
+    success_url = reverse_lazy('sale_list')
     permission_required = 'pos.delete_sale'
     url_redirect = success_url
 
@@ -336,7 +336,7 @@ class SaleInvoicePdfView(View):
             return response
         except:
             pass
-        return HttpResponseRedirect(reverse_lazy('pos:sale_list'))
+        return HttpResponseRedirect(reverse_lazy('sale_list'))
 
 
 # WeasyPrint
@@ -359,4 +359,4 @@ class SaleInvoicePdfWeasyPrintView(View):
             return HttpResponse(pdf, content_type='application/pdf')
         except:
             pass
-        return HttpResponseRedirect(reverse_lazy('pos:sale_list'))
+        return HttpResponseRedirect(reverse_lazy('sale_list'))

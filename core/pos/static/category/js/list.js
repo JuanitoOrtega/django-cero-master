@@ -46,4 +46,5 @@ let category = {
 
 $(function () {
   category.list();
+  console.log(pathname);
 });

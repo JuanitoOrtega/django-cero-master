@@ -2,25 +2,16 @@ from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum, FloatField
-from django.http import JsonResponse
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 from django.db.models.functions import Coalesce
+from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from core.pos.models import Sale, Product, SaleProduct
 
-from random import randint
-
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard.html'
-
-    # Usando AJAX para mostrar el gráfico
-    @method_decorator(csrf_exempt)
-    # @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         request.user.get_group_session()
@@ -32,58 +23,35 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         try:
             action = request.POST['action']
             if action == 'get_graph_sales_year_month':
+                points = []
+                year = datetime.now().year
+                for m in range(1, 13):
+                    total = Sale.objects.filter(date_joined__year=year, date_joined__month=m).aggregate(result=Coalesce(Sum('total'), 0.00, output_field=FloatField())).get('result')
+                    points.append(float(total))
                 data = {
                     'name': 'Vendido',
                     'showInLegend': False,
                     'colorByPoint': True,
-                    'data': self.get_graph_sales_year_month()
+                    'data': points
                 }
             elif action == 'get_graph_sales_products_year_moth':
+                points = []
+                year = datetime.now().year
+                month = datetime.now().month
+                for p in Product.objects.filter():
+                    total = SaleProduct.objects.filter(sale__date_joined__year=year, sale__date_joined__month=month, product_id=p.id).aggregate(result=Coalesce(Sum('subtotal'), 0, output_field=FloatField())).get('result')
+                    if total > 0:
+                        points.append({'name': p.name,'y': float(total)})
                 data = {
                     'name': 'Porcentaje',
                     'colorByPoint': True,
-                    'data': self.get_graph_sales_products_year_moth()
+                    'data': points
                 }
-            elif action == 'get_graph_live':
-                data = {
-                    'y': randint(1, 100)
-                }
-                print(data)
             else:
                 data['error'] = 'Ha ocurrido un error.'
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
-
-    def get_graph_sales_year_month(self):
-        data = []
-        try:
-            year = datetime.now().year
-            for m in range(1, 13):
-                total = Sale.objects.filter(date_joined__year=year, date_joined__month=m).aggregate(
-                    r=Coalesce(Sum('total'), 0, output_field=FloatField())).get('r')
-                data.append(float(total))
-        except:
-            pass
-        return data
-
-    def get_graph_sales_products_year_moth(self):
-        data = []
-        year = datetime.now().year
-        month = datetime.now().month
-        try:
-            for p in Product.objects.all():
-                total = SaleProduct.objects.filter(sale__date_joined__year=year, sale__date_joined__month=month,
-                                                  product_id=p.id).aggregate(
-                    r=Coalesce(Sum('quantity'), 0, output_field=FloatField())).get('r')
-                if total > 0:
-                    data.append({
-                        'name': p.product_name,
-                        'y': float(total),
-                    })
-        except:
-            pass
-        return data
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -92,5 +60,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['subtitleb'] = 'Gráfico de ventas utilizando AJAX'
         context['subtitlepie'] = 'Distribución porcentual de Ventas'
         context['subtitlelive'] = 'Gráfico Live'
-        context['graph_sales_year_month'] = self.get_graph_sales_year_month()
+        # context['graph_sales_year_month'] = self.get_graph_sales_year_month()
         return context
+
+
+def page_not_found404(request, exception):
+    return render(request, '404.html')

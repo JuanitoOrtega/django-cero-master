@@ -60,7 +60,7 @@
     $('form').on('submit', function (e) {
         e.preventDefault();
         let parameters = new FormData(this);
-        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estás seguro que quieres realizar esta acción?', parameters, function () {
+        submit_with_ajax(pathname, 'Notificación', '¿Estás seguro que quieres realizar esta acción?', parameters, function () {
             location.href = '{{ list_url }}';
         });
     });

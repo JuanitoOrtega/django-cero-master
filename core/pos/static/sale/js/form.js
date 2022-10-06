@@ -156,7 +156,7 @@ $(function () {
     });
 
     $('#myModalClient').on('hidden.bs.modal', function (e) {
-        $('#frmClient').trigger('reset');
+        $('#formClient').trigger('reset');
     });
 
     $('input[name="birthdate"]').datetimepicker({
@@ -257,7 +257,7 @@ $(function () {
 
                 });
         })
-        .on('change', 'input[name="cant"]', function () {
+        .on('change', 'input[name="quantity"]', function () {
             console.clear();
             let cant = parseInt($(this).val());
             let tr = tblProducts.cell($(this).closest('td, li')).index();
@@ -356,7 +356,7 @@ $(function () {
 
     $('#tblSearchProducts tbody')
         .off()
-        .on('click', 'a[rel="add"]', function () {
+        .on('click', 'button[rel="add"]', function () {
             let tr = tblSearchProducts.cell($(this).closest('td, li')).index();
             let product = tblSearchProducts.row(tr.row).data();
             product.cant = 1;
@@ -387,7 +387,7 @@ $(function () {
         sale.calculateInvoice();
     }).val(0.12);
 
-    $('#frmSale').on('submit', function (e) {
+    $('#formSale').on('submit', function (e) {
         e.preventDefault();
 
         if (sale.details.products.length === 0) {

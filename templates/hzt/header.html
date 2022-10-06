@@ -2,7 +2,7 @@
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-        <a href="{% url 'pos:dashboard' %}" class="navbar-brand">
+        <a href="{% url 'dashboard' %}" class="navbar-brand">
             <img src="{% static 'images/logobee.png' %}" alt="Bee ERP" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">Bee ERP</span>
@@ -15,26 +15,26 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="{% url 'pos:dashboard' %}" class="nav-link"><i class="fas fa-home"></i> Inicio</a>
+                    <a href="{% url 'dashboard' %}" class="nav-link"><i class="fas fa-home"></i> Inicio</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                        class="nav-link dropdown-toggle"><i class="fas fa-folder-open"></i> Mantenimientos</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li>
-                            <a href="{% url 'pos:category_list' %}" class="dropdown-item"><i
+                            <a href="{% url 'category_list' %}" class="dropdown-item"><i
                                     class="fas fa-truck-loading"></i> Categorías</a>
                         </li>
                         <li>
-                            <a href="{% url 'pos:product_list' %}" class="dropdown-item"><i class="fas fa-boxes"></i>
+                            <a href="{% url 'product_list' %}" class="dropdown-item"><i class="fas fa-boxes"></i>
                                 Productos</a>
                         </li>
                         <li>
-                            <a href="{% url 'pos:client_list' %}" class="dropdown-item"><i class="fas fa-users"></i>
+                            <a href="{% url 'client_list' %}" class="dropdown-item"><i class="fas fa-users"></i>
                                 Clientes</a>
                         </li>
                         <li>
-                            <a href="{% url 'pos:sale_list' %}" class="dropdown-item"><i
+                            <a href="{% url 'sale_list' %}" class="dropdown-item"><i
                                     class="fas fa-shopping-cart"></i> Ventas</a>
                         </li>
                         <li>

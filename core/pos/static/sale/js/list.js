@@ -1,4 +1,4 @@
-let tblSales;
+let tblSale;
 let input_daterange;
 
 let sale = {
@@ -12,7 +12,7 @@ let sale = {
             parameters['start_date'] = '';
             parameters['end_date'] = '';
         }
-        tblSales = $('#data').DataTable({
+        tblSale = $('#data').DataTable({
             scrollX: true,
             autoWidth: false,
             destroy: true,
@@ -30,13 +30,6 @@ let sale = {
                 }
             },
             columns: [
-                // Aplicando Child rows de datatables para ver el detalle de las ventas
-                {
-                    className: 'dt-control',
-                    orderable: false,
-                    data: null,
-                    defaultContent: '',
-                },
                 {"data": "number"},
                 {"data": "client.first_name"},
                 {"data": "client.last_name"},
@@ -93,7 +86,7 @@ let sale = {
         html += '</tr>';
         html += '</thead>';
         html += '<tbody>';
-        $.each(d.details, function (key, value) {
+        $.each(d.saleproduct, function (key, value) {
             html += '<tr>';
             html += '<th scope="row">' + value.product.product_name + '</th>';
             html += '<td>' + value.product.category.name + '</td>';
@@ -111,14 +104,13 @@ let sale = {
 $(function () {
     input_daterange = $('input[name="date_range"]');
 
-    input_daterange
-        .daterangepicker({
-            language: 'auto',
-            startDate: new Date(),
-            locale: {
-                format: 'YYYY-MM-DD',
-            }
-        });
+    input_daterange.daterangepicker({
+        language: 'auto',
+        startDate: new Date(),
+        locale: {
+            format: 'YYYY-MM-DD',
+        }
+    });
 
     $('.drp-buttons').hide();
 
@@ -137,7 +129,7 @@ $(function () {
         let data = tblSales.row(tr.row).data();
         // console.log(data);
 
-        $('#tblDetail').DataTable({
+        $('#tblProducts').DataTable({
             scrollX: true,
             autoWidth: true,
             destroy: true,
@@ -157,8 +149,6 @@ $(function () {
                     'X-CSRFToken': csrftoken
                 }
             },
-            // # Otra forma de acceder a los detalles de una venta
-            // data: data.details,
             columns: [
                 {"data": "product.product_name"},
                 {"data": "product.category.name"},
@@ -189,17 +179,16 @@ $(function () {
 
         $('#detailModal').modal('show');
 
-    })
-        .on('click', 'a[rel="number"]', function () {
-            var tr = $(this).closest('tr');
-            var row = tblSale.row(tr);
-            if (row.child.isShown()) {
-                row.child.hide();
-                tr.removeClass('shown');
-            } else {
-                row.child(sale.formatRowHtml(row.data())).show();
-                tr.addClass('shown');
-            }
-        });
+    }).on('click', 'a[rel="number"]', function () {
+        var tr = $(this).closest('tr');
+        var row = tblSale.row(tr);
+        if (row.child.isShown()) {
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            row.child(sale.formatRowHtml(row.data())).show();
+            tr.addClass('shown');
+        }
+    });
     sale.list(false);
 });
