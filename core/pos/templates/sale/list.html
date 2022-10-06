@@ -1,11 +1,16 @@
 {% extends 'list.html' %}
 {% load static %}
 {% block head_list %}
+    <!-- Daterangepicker -->
+    <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
+    <script src="{% static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
+    <script src="{% static 'daterangepicker/locale/es.js' %}"></script>
     <script src="{% static 'sale/js/list.js' %}"></script>
 {% endblock %}
 
 {% block columns %}
     <tr>
+        <th scope="col">Número</th>
         <th scope="col">Detalle</th>
         <th scope="col">Nro</th>
         <th scope="col">Nombres</th>
@@ -13,6 +18,7 @@
         <th scope="col">Fecha</th>
         <th scope="col">Subtotal</th>
         <th scope="col">IVA</th>
+        <th scope="col">IVA calculado</th>
         <th scope="col">Total</th>
         <th scope="col">Opciones</th>
     </tr>
@@ -54,4 +60,26 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block content_list_before %}
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="form-group">
+                <label>Rangos de fechas:</label>
+                <div class="input-group mb-3">
+                    {{ form.date_range }}
+                    <div class="input-group-append">
+                        <button class="btn btn-success btnSearch" type="button">
+                            <i class="fas fa-calendar-check"></i> Buscar por rangos
+                        </button>
+                        <button class="btn btn-warning btnSearchAll" type="button">
+                            <i class="fas fa-calendar-check"></i> Ver todas
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
 {% endblock %}

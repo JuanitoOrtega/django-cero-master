@@ -22,6 +22,7 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
+                                        {% block content_list_before %}{% endblock %}
                                         <table id="data" class="table table-bordered table-striped">
                                             <thead>
                                             {% block columns %}
@@ -45,29 +46,12 @@
                                 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript">
-    $(function () {
-        $("#data").DataTable({
-            "responsive": true,
-            "autoWidth": false,
-            "language": {
-                url: '{% static 'datatables/lang/es-ES.json' %}'
-            }
-        });
-        $('.btnRegistro').on('click', function() {
-            $.ajax({
-                url: '{% url 'category_list' %}',
-                type: 'POST',
-                data: { id: 1},
-                dataType: 'json'
-            }).done(function(data) {
-                console.log(data);
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                alert(textStatus + ': ' + errorThrown);
-            }).always(function(data) {
-
+    <script type="application/javascript">
+        $(function () {
+            $('#data').DataTable({
+                responsive: true,
+                autoWidth: false
             });
         });
-    });
-</script>
+    </script>
 {% endblock %}
