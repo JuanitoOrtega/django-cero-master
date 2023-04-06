@@ -158,6 +158,7 @@ class SaleUpdateView(ValidatePermissionRequiredMixin, UpdateView):
             item = i.product.toJSON()
             item['quantity'] = i.quantity
             data.append(item)
+        print(data)
         return json.dumps(data)
 
     def post(self, request, *args, **kwargs):

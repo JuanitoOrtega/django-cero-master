@@ -93,8 +93,23 @@ class Sale(models.Model):
     total_iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Total IVA')
     total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2, verbose_name='Total')
 
-    def __str__(self):
-        return self.client.first_name
+    class Meta:
+        verbose_name = 'Venta'
+        verbose_name_plural = 'Ventas'
+        ordering = ['id']
+
+    def delete(self, using=None, keep_parents=False):
+        for detail in self.saleproduct_set.all():
+            detail.product.stock += detail.quantity
+            detail.product.save()
+        super(Sale, self).delete()
+
+    def calculate_invoice(self):
+        subtotal = self.saleproduct_set.all().aggregate(result=Coalesce(Sum(F('price') * F('quantity')), 0.00, output_field=FloatField())).get('result')
+        self.subtotal = subtotal
+        self.total_iva = self.subtotal * float(self.iva / 100)
+        self.total = float(self.subtotal) + float(self.total_iva)
+        self.save()
 
     def get_number(self):
         return f'{self.id:06d}'
@@ -111,24 +126,8 @@ class Sale(models.Model):
         item['saleproduct'] = [i.toJSON() for i in self.saleproduct_set.all()]
         return item
 
-    def delete(self, using=None, keep_parents=False):
-        for detail in self.saleproduct_set.all():
-            detail.product.stock += detail.quantity
-            detail.product.save()
-        super(Sale, self).delete()
-
-    def calculate_invoice(self):
-        subtotal = self.saleproduct_set.all().aggregate(
-            result=Coalesce(Sum(F('price') * F('quantity')), 0.00, output_field=FloatField())).get('result')
-        self.subtotal = subtotal
-        self.total_iva = self.subtotal * float(self.iva)
-        self.total = float(self.subtotal) + float(self.total_iva)
-        self.save()
-
-    class Meta:
-        verbose_name = 'Venta'
-        verbose_name_plural = 'Ventas'
-        ordering = ['id']
+    def __str__(self):
+        return self.client.first_name
 
 
 class SaleProduct(models.Model):

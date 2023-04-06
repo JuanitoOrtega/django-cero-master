@@ -230,17 +230,16 @@ $(function () {
                 '</div>' +
                 '</div>');
         }
-    })
-        .on('select2:select', function (e) {
-            let data = e.params.data;
-            if (!Number.isInteger(data.id)) {
-                return false;
-            }
-            data.cant = 1;
-            data.subtotal = 0.00;
-            sale.addProduct(data);
-            select_search_product.val('').trigger('change.select2');
-        });
+    }).on('select2:select', function (e) {
+        let data = e.params.data;
+        if (!Number.isInteger(data.id)) {
+            return false;
+        }
+        data.quantity = 1;
+        data.subtotal = 0.00;
+        sale.addProduct(data);
+        select_search_product.val('').trigger('change.select2');
+    });
 
     $('#tblProducts tbody')
         .off()
@@ -348,7 +347,6 @@ $(function () {
 
             }
         });
-
         $('#myModalSearchProducts').modal('show');
     });
 
@@ -357,7 +355,7 @@ $(function () {
         .on('click', 'button[rel="add"]', function () {
             let tr = tblSearchProducts.cell($(this).closest('td, li')).index();
             let product = tblSearchProducts.row(tr.row).data();
-            product.cant = 1;
+            product.quantity = 1;
             product.subtotal = 0.00;
             sale.addProduct(product);
             tblSearchProducts.row($(this).parents('tr')).remove().draw();
@@ -387,12 +385,10 @@ $(function () {
 
     $('#formSale').on('submit', function (e) {
         e.preventDefault();
-
         if (sale.details.products.length === 0) {
             message_error('Debe al menos tener un item en su detalle de venta');
             return false;
         }
-
         let success_url = this.getAttribute('data-url');
         let parameters = new FormData(this);
         parameters.append('products', JSON.stringify(sale.details.products));
@@ -406,6 +402,5 @@ $(function () {
                 });
             });
     });
-
     sale.listProducts();
 });

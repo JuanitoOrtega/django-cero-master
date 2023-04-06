@@ -13,8 +13,7 @@ let sale = {
             parameters['end_date'] = '';
         }
         tblSale = $('#data').DataTable({
-            scrollX: true,
-            autoWidth: false,
+            responsive: true,
             destroy: true,
             deferRender: true,
             language: {
@@ -42,7 +41,15 @@ let sale = {
             order: [[0, "desc"], [2, "desc"]],
             columnDefs: [
                 {
-                    targets: [-2, -3, -4, -5],
+                    targets: [-4],
+                    class: 'text-center',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        return data + '%';
+                    }
+                },
+                {
+                    targets: [-2, -3, -5],
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
@@ -65,7 +72,7 @@ let sale = {
                     targets: [0],
                     class: 'text-center',
                     render: function (data, type, row) {
-                        return '<a class="badge badge-secondary badge-pill" rel="number">' + data + '</a>'
+                        return '<a class="badge badge-secondary badge-pill" rel="number" style="cursor: pointer;">' + data + '</a>'
                     }
                 }
             ],
