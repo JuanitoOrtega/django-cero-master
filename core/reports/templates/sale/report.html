@@ -10,7 +10,14 @@
                                       <!-- Date range -->
                                       <div class="form-group">
                                         <label>Rango de fechas:</label>
-                                        {{ form.date_range }}
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                              <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                          </div>
+                                          {{ form.date_range }}
+                                        </div>
                                       </div>
                                       <!-- /.form group -->
                                     </div>
