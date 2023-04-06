@@ -1,0 +1,10 @@
+{% extends 'form.html' %}
+{% load static %}
+{% block head_form %}
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{% static 'plugins/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+    <script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
+    <script src="{% static 'plugins/select2/js/i18n/es.js' %}"></script>
+    <script src="{% static 'user/js/form.js' %}"></script>
+{% endblock %}

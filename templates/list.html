@@ -11,61 +11,47 @@
     {% block head_list %}
     {% endblock %}
 {% endblock %}
-{% block content %}
-<div class="card">
-    <div class="card-header">
-        <h5 class="card-title m-0">
-            <i class="fas fa-list"></i>
-            {{ subtitle }} / {{ date_now }}
-        </h5>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-        <table id="data" class="table table-bordered table-striped">
-            <thead>
-            {% block columns %}
-            {% endblock %}
-            </thead>
-            <tbody>
-            {% block rows %}
-            {% endblock %}
-            </tbody>
-        </table>
-    </div>
-    <!-- /.card-body -->
-    <div class="card-footer">
-        {% block buttons_list %}
-            <a href="{{ create_url }}" class="btn btn-primary btn-flat btnRegistro"><i class="fas fa-plus"></i> Nuevo registro</a>
-            <a href="{{ list_url }}" class="btn btn-success btn-flat"><i class="fas fa-sync"></i> Actualizar</a>
-        {% endblock %}
-    </div>
-</div>
-<!-- /.content -->
-{% endblock %}
-{% block javascript %}
-<script type="text/javascript">
-    $(function () {
-        $("#data").DataTable({
-            "responsive": true,
-            "autoWidth": false,
-            "language": {
-                url: '{% static 'datatables/lang/es-ES.json' %}'
-            }
-        });
-        $('.btnRegistro').on('click', function() {
-            $.ajax({
-                url: '{% url 'erp:category_list' %}',
-                type: 'POST',
-                data: { id: 1},
-                dataType: 'json'
-            }).done(function(data) {
-                console.log(data);
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                alert(textStatus + ': ' + errorThrown);
-            }).always(function(data) {
 
+                                {% block content %}
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h5 class="card-title m-0">
+                                            <i class="fas fa-list"></i>
+                                            {{ subtitle }}
+                                        </h5>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        {% block content_list_before %}{% endblock %}
+                                        <table id="data" class="table table-bordered table-striped">
+                                            <thead>
+                                            {% block columns %}
+                                            {% endblock %}
+                                            </thead>
+                                            <tbody>
+                                            {% block rows %}
+                                            {% endblock %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        {% block buttons_list %}
+                                            <a href="{{ create_url }}" class="btn btn-primary btn-flat btnRegistro"><i class="fas fa-plus"></i> Nuevo registro</a>
+                                            <a href="{{ list_url }}" class="btn btn-success btn-flat"><i class="fas fa-sync"></i> Actualizar</a>
+                                        {% endblock %}
+                                    </div>
+                                </div>
+                                <!-- /.content -->
+                                {% endblock %}
+
+{% block javascript %}
+    <script type="application/javascript">
+        $(function () {
+            $('#data').DataTable({
+                responsive: true,
+                autoWidth: false
             });
         });
-    });
-</script>
+    </script>
 {% endblock %}

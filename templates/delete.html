@@ -12,7 +12,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <p class="text-danger">¿Estás seguro que quieres eliminar: <strong>{{ object.name }}</strong>?</p>
+            <p class="text-danger">¿Estás seguro que quieres eliminar el registro Nro.: <strong>{{ object.id }}</strong>?</p>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -22,12 +22,23 @@
     </div>
     <!-- /.content -->
 </form>
-<script>
+<script type="text/javascript">
     $('form').on('submit', function (e) {
         e.preventDefault();
         let parameters = new FormData(this);
         submit_with_ajax(window.location.pathname, 'Confirmación', '¿Estás seguro que quieres eliminar este registro?', parameters, function () {
-            location.href = '{{ list_url }}';
+            let Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000
+            });
+            Toast.fire({
+                icon: 'success',
+                title: 'Acción ejecutada con éxito.'
+            }).then((result) => {
+                location.href = '{{ list_url }}';
+            });
         });
     });
 </script>

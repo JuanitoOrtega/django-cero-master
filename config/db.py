@@ -14,7 +14,7 @@ SQLITE = {
 
 POSTGRESQL = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'horus',
         'USER': 'juanitodev',
         # 'PASSWORD': '',
@@ -28,14 +28,14 @@ POSTGRESQL = {
 MYSQL = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db',
+        'NAME': 'horus',
         'USER': 'root',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
-        'PORT': '',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-        }
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+        'PORT': '8889',
+        # 'OPTIONS': {
+        #     'sql_mode': 'traditional',
+        # }
     }
 }
 

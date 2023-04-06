@@ -1,0 +1,42 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+    <script type="text/javascript" src="{% static 'plugins/moment/moment.min.js' %}"></script>
+    <script src="{% static 'plugins/moment/locale/es.js' %}"></script>
+    <!-- Daterangepicker -->
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}" />
+    <script type="text/javascript" src="{% static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
+    <script type="text/javascript" src="{% static 'daterangepicker/locale/es.js' %}"></script>
+    <!-- DataTables buttons -->
+    <link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}"/>
+    <script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'plugins/jszip/jszip.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}" type="text/javascript"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+    {% block head_report %}
+
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+                              <div class="card card-primary">
+                                <div class="card-header">
+                                    <h5 class="card-title m-0">
+                                      <i class="fas fa-chart-bar"></i>
+                                      {{ subtitle }}
+                                    </h5>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                  {% block content_report %}
+
+                                  {% endblock %}
+                                </div>
+                                <!-- /.card-body -->
+                              </div>
+                              <!-- /.content -->
+{% endblock %}

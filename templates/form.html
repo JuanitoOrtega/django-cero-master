@@ -1,9 +1,15 @@
 {% extends 'layout.html' %}
 {% load widget_tweaks %}
+
+{% block head %}
+    {% block head_form %}
+    {% endblock %}
+{% endblock %}
+
 {% block content %}
 <form method="post" action="." enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="card">
+    <div class="card card-primary">
         <div class="card-header">
             <h5 class="card-title m-0">
                 {% if action == 'add' %}
@@ -17,22 +23,9 @@
         <!-- /.card-header -->
         <div class="card-body">
             <input type="hidden" name="action" value="{{ action }}">
-            {% if form.errors %}
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h5><i class="icon fas fa-ban"></i> Ha ocurrido un error al querer guardar el registro</h5>
-                    <ul>
-                        {% for field in form %}
-                            {% for error in field.errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
             {% for field in form.visible_fields %}
             <div class="form-group">
-                <label for="email">{{ field.label }}</label>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                 {{ field }}
             </div>
             {% endfor %}
@@ -63,11 +56,11 @@
             confirmButtonText: 'Cerrar'
         });
     {% endif %}
+
     $('form').on('submit', function (e) {
         e.preventDefault();
-        // let parameters = $(this).serializeArray();
         let parameters = new FormData(this);
-        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estás seguro que quieres realizar esta acción?', parameters, function () {
+        submit_with_ajax(pathname, 'Notificación', '¿Estás seguro que quieres realizar esta acción?', parameters, function () {
             location.href = '{{ list_url }}';
         });
     });

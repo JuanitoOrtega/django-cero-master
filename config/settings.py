@@ -42,10 +42,11 @@ INSTALLED_APPS = [
     # Libs
     'widget_tweaks',
     # Apps
-    'core.erp',
-    'core.homepage',
     'core.login',
+    'core.pos',
+    'core.reports',
     'core.user',
+    'core.homepage',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Para trabajar con static files
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
@@ -131,7 +135,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 # Configuración para iniciar y cerrar sesión
-LOGIN_REDIRECT_URL = '/erp/dashboard/'
+LOGIN_REDIRECT_URL = '/pos/dashboard/'
 LOGOUT_REDIRECT_URL = '/login/'
 LOGIN_URL = '/login/'
 
@@ -142,3 +146,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Clase personalizada para gestionar usuarios
 AUTH_USER_MODEL = 'user.User'
+
+# Para trabajar con los objetos dentro de las sesiones
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+# Configuración para enviar correos
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ortegaj83@gmail.com'
+EMAIL_HOST_PASSWORD = 'telqoxvxatxxhmmj'
+EMAIL_USE_TLS = True
+
+DOMAIN = ''

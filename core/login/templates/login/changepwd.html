@@ -1,0 +1,68 @@
+{% extends 'login/base.html' %}
+
+{% block content %}
+<div class="login-box">
+        <div class="login-logo">
+            <a href="{% url 'index' %}">Bee <b>ERP</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Cambio de contraseña</p>
+
+                <form action=".." method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    <div class="input-group mb-3">
+                        {{ form.password }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ form.confirm_password }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-lock"></i> Cambiar contraseña
+                            </button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <p class="mt-2">
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('form').on('submit', function (e) {
+                    e.preventDefault();
+                    let parameters = new FormData(this);
+                    submit_with_ajax(window.location.pathname, 'Notificación', '¿Estás seguro que quieres cambiar tu contraseña?', parameters, function () {
+                       Swal.fire({
+                           title: 'Notificación!',
+                           text: 'Tu contraseña ha sido cambiada correctamente.',
+                           icon: 'success',
+                           timer: 3000,
+                           confirmButtonText: 'Cerrar',
+                       }).then((result) => {
+                          location.href = '{{ login_url }}';
+                       });
+                    });
+                });
+            });
+        </script>
+    </div>
+    <!-- /.login-box -->
+{% endblock %}

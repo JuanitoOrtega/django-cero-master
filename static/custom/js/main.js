@@ -1,0 +1,1 @@
+let pathname = window.location.pathname;
